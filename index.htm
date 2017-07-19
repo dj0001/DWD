@@ -32,7 +32,7 @@ function update() {
 var script = document.createElement('script');
 script.src = "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json"
 document.head.replaceChild(script,document.getElementsByTagName("script")[0])
-//setTimeout(function(){update()},10*60000)
+setTimeout(function(){update()},10*60000)  //
 }; if(navigator.onLine) update()
 
 </script>
