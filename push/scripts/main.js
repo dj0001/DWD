@@ -198,7 +198,7 @@ function showNotification() {
 
 var warnWetter = function(a) {}
 warnWetter.loadWarnings = function(a) { 
-b=location.search.slice(1)||8097610000  //Augsburg   ?108111000
+var b=location.search.slice(1)||8097610000  //Augsburg   ?108111000
 a=a.warnings[b]||"no warning"
 showNotification()  //todo: only to warnings
 document.getElementById("warn").innerHTML=JSON.stringify(a)
