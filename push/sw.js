@@ -55,8 +55,9 @@ function notify() {
     icon: 'images/icon.png',
     badge: 'images/badge.png'
  }
-self.registration.showNotification(title, options)  //ok
+registration.showNotification(title, options)  //ok
 //ServiceWorkerRegistration.showNotification(title, options) //ko
 }
 
 setTimeout(function(){ notify(); }, 3000)
+notify()
