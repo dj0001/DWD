@@ -57,7 +57,6 @@ function notify() {
  }
 registration.showNotification(title, options)  //ok
 //ServiceWorkerRegistration.showNotification(title, options) //ko
-  var notification = new Notification("Hi there!");
 }
 
 setTimeout(function(){ notify(); }, 3000)
