@@ -59,4 +59,4 @@ registration.showNotification(title, options)  //ok
 //ServiceWorkerRegistration.showNotification(title, options) //ko
 }
 
-setTimeout(function(){ notify(); }, 3000)
+//setTimeout(function(){ notify(); }, 3000)
