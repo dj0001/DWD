@@ -60,4 +60,3 @@ registration.showNotification(title, options)  //ok
 }
 
 setTimeout(function(){ notify(); }, 3000)
-notify()
