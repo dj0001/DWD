@@ -194,4 +194,20 @@ function showNotification() {
 
 
 
-setTimeout(function(){ showNotification(); }, 3000)
+//setTimeout(function(){ showNotification(); }, 3000)
+
+var warnWetter = function(a) {}
+warnWetter.loadWarnings = function(a) { 
+b=location.search.slice(1)||8097610000  //Augsburg   ?108111000
+a=a.warnings[b]||"no warning"
+showNotification()  //todo: only to warnings
+document.getElementById("warn").innerHTML=JSON.stringify(a)
+document.getElementById("warn").title=new Date(a[0].start).toTimeString()+" - "+new Date(a[0].end).toTimeString()
+  }
+
+function update() {
+var script = document.createElement('script');
+script.src = "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json"
+document.head.replaceChild(script,document.getElementsByTagName("script")[0])
+setTimeout(function(){update()},10*60000)  //
+}; if(navigator.onLine) update()
