@@ -17,7 +17,24 @@ body {height:99%; font-family:Helvetica;background:#CCCCCC;}
 <span id="warn"></span>
 
 <script>
-if(typeof(Notification) != "undefined") Notification.requestPermission();
+navigator.serviceWorker.register('sw.js');
+	
+function showNotification() {
+  Notification.requestPermission(function(result) {
+    if (result === 'granted') {
+      navigator.serviceWorker.ready.then(function(registration) {
+        registration.showNotification('Vibration Sample', {
+          body: 'Buzz! Buzz!',
+          icon: '../images/touch/chrome-touch-icon-192x192.png',
+          vibrate: [200, 100, 200, 100, 200, 100, 200],
+          tag: 'vibration-sample'
+        });
+      });
+    }
+  });
+}
+	
+if(typeof(Notification) != "undefined") Notification.requestPermission();  //
 var warnWetter = function(a) {}
 warnWetter.loadWarnings = function(a) { 
 b=location.search.slice(1)||8097610000  //Augsburg   ?108111000
@@ -25,8 +42,10 @@ a=a.warnings[b]; var c=a
 a=a||"no warning"
 document.getElementById("warn").innerHTML=JSON.stringify(a)
 document.getElementById("warn").title=new Date(a[0].start).toTimeString()+" - "+new Date(a[0].end).toTimeString()
-if(c) new Notification(" warning",{tag:"1"})  // not chrome android!
+//if(c) new Notification(" warning",{tag:"1"})  // not chrome android!
+if(c) showNotification()
   }
+
 function update() {
 var script = document.createElement('script');
 script.src = "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json"
