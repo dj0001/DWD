@@ -19,12 +19,12 @@ body {height:99%; font-family:Helvetica;background:#CCCCCC;}
 <script>
 navigator.serviceWorker.register('sw.js');
 	
-function showNotification() {
+function showNotification(tx) {
   Notification.requestPermission(function(result) {
     if (result === 'granted') {
       navigator.serviceWorker.ready.then(function(registration) {
         registration.showNotification('Vibration Sample', {
-          body: 'Buzz! Buzz!',
+          body: 'Buzz! '+tx,  //Buzz!
           icon: '../images/touch/chrome-touch-icon-192x192.png',
           vibrate: [200, 100, 200, 100, 200, 100, 200],
           tag: 'vibration-sample'
@@ -41,9 +41,9 @@ b=location.search.slice(1)||8097610000  //Augsburg   ?108111000
 a=a.warnings[b]; var c=a
 a=a||"no warning"
 document.getElementById("warn").innerHTML=JSON.stringify(a)
-document.getElementById("warn").title=new Date(a[0].start).toTimeString()+" - "+new Date(a[0].end).toTimeString()
+//document.getElementById("warn").title=new Date(a[0].start).toTimeString()+" - "+new Date(a[0].end).toTimeString()
 //if(c) new Notification(" warning",{tag:"1"})  // not chrome android!
-if(c) showNotification()
+if(c) showNotification(a[0].start)
   }
 
 function update() {
