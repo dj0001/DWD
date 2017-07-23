@@ -1,5 +1,5 @@
-//openweathermap don't work with https
-fetch('https://api.openweathermap.org/data/2.5/forecast/daily?q=Augsburg,de&units=metric&callback=test&lang=de&APPID=bc74c09718f9a37a61f1c58e046ac7f1', {mode: 'cors'})  
+//openweathermap don't work with https https://api.openweathermap.org/data/2.5/forecast/daily?q=Augsburg,de&units=metric&callback=test&lang=de&APPID=bc74c09718f9a37a61f1c58e046ac7f1
+fetch('https://apis.google.com/js/api.js', {mode: 'cors'})  
   .then(function(response) {  
     return response.text();  
   })  
