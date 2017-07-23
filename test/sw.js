@@ -4,7 +4,8 @@ fetch('https://lh3.googleusercontent.com/iC47iekI2X1_dFpi53Lx1wx16kXjBXOI8Fo38h6
     return response.text();  
   })  
   .then(function(text) {  
-    console.log('Request successful', text);  
+    console.log('Request successful');   //, text
+  showNotification()
   })  
   .catch(function(error) {  
     console.log('Request failed', error)  
@@ -46,3 +47,18 @@ self.addEventListener("push", function (event) {
   // ????????????????
   event.waitUntil(promise);
 });
+
+function showNotification(tx) {
+  Notification.requestPermission(function(result) {
+    if (result === 'granted') {
+      navigator.serviceWorker.ready.then(function(registration) {
+        registration.showNotification('Vibration Sample', {
+          body: 'Buzz! '+tx  //Buzz!
+          icon: '../images/touch/chrome-touch-icon-192x192.png',
+          vibrate: [200, 100, 200, 100, 200, 100, 200],
+          tag: 'vibration-sample'
+        });
+      });
+    }
+  });
+}
