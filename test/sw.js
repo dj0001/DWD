@@ -49,8 +49,8 @@ self.addEventListener("push", function (event) {
 });
 
 function showNotification(tx) {
-  Notification.requestPermission(function(result) {
-    if (result === 'granted') {
+  //Notification.requestPermission(function(result) {
+    //if (result === 'granted') {
       navigator.serviceWorker.ready.then(function(registration) {
         registration.showNotification('Vibration Sample', {
           body: 'Buzz! '+tx,  //Buzz!
@@ -59,6 +59,6 @@ function showNotification(tx) {
           tag: 'vibration-sample'
         });
       });
-    }
-  });
+    //}
+  //});
 }
