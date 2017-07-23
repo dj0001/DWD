@@ -1,4 +1,4 @@
-fetch('http://api.openweathermap.org/data/2.5/forecast/daily?q=Augsburg,de&units=metric&callback=test&lang=de&APPID=bc74c09718f9a37a61f1c58e046ac7f1', {mode: 'cors'})  
+fetch('https://api.openweathermap.org/data/2.5/forecast/daily?q=Augsburg,de&units=metric&callback=test&lang=de&APPID=bc74c09718f9a37a61f1c58e046ac7f1', {mode: 'cors'})  
   .then(function(response) {  
     return response.text();  
   })  
