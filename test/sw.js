@@ -1,5 +1,5 @@
 //openweathermap don't work with https https://api.openweathermap.org/data/2.5/forecast/daily?q=Augsburg,de&units=metric&callback=test&lang=de&APPID=bc74c09718f9a37a61f1c58e046ac7f1
-fetch('https://apis.google.com/js/api.js', {mode: 'cors'})  
+fetch('https://lh3.googleusercontent.com/iC47iekI2X1_dFpi53Lx1wx16kXjBXOI8Fo38h6hMVWU2UtuqY2V1D61QEsC1e0WQuzXkboOfg=h512-no', {mode: 'cors'})  
   .then(function(response) {  
     return response.text();  
   })  
@@ -7,7 +7,7 @@ fetch('https://apis.google.com/js/api.js', {mode: 'cors'})
     console.log('Request successful', text);  
   })  
   .catch(function(error) {  
-    log('Request failed', error)  
+    console.log('Request failed', error)  
   });
 
 self.addEventListener("push", function (event) {
