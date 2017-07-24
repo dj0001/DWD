@@ -44,7 +44,14 @@ document.getElementById("warn").innerHTML=JSON.stringify(a)
 //document.getElementById("warn").title=new Date(a[0].start).toTimeString()+" - "+new Date(a[0].end).toTimeString()
 //if(c) new Notification(" warning",{tag:"1"})  // not chrome android!
 if(c) showNotification(a[0].start) }
-else console.log("todo")
+else {
+for (var x in a.warnings) {
+  if (a.warnings[x][0].regionName.match(b)) {
+    document.getElementById("warn").innerHTML = JSON.stringify(a.warnings[x])
+    showNotification(a.warnings[x][0].start)
+  }
+}
+}
   }
 
 function update() {
