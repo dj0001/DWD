@@ -60,16 +60,6 @@ script.src = "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json"
 document.head.replaceChild(script,document.getElementsByTagName("script")[0])
 setTimeout(function(){update()},10*60000)  //
 }; if(navigator.onLine) update()
-
-self.addEventListener('notificationclick', function(event) {
-  console.log('[Service Worker] Notification click Received.');
-
-  event.notification.close();
-
-  event.waitUntil(
-    clients.openWindow('http://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html')  //https://developers.google.com/web/
-  );
-});
 </script>
 </body>
 </html>
