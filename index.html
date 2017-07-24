@@ -49,6 +49,7 @@ else { // ?Ulm
     if (a.warnings[x][0].regionName.match(b)) {
       document.getElementById("warn").innerHTML = JSON.stringify(a.warnings[x])
       showNotification(a.warnings[x][0].start)
+      document.getElementById("warn").title="last update:"+new Date(a.time).toTimeString()	
     }
   }
 }
