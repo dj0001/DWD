@@ -16,6 +16,8 @@ body {height:99%; font-family:Helvetica;background:#CCCCCC;}
 <span id="warn">no warning</span>
 
 <script>
+var dreg=8097610000, dlev=3  //Augsburg
+	
 navigator.serviceWorker.register('sw.js');
 	
 function showNotification(tx) {
@@ -36,7 +38,7 @@ function showNotification(tx) {
 if(typeof(Notification) != "undefined") Notification.requestPermission();  //
 var warnWetter = function(a) {}
 warnWetter.loadWarnings = function(a) { 
-b=location.search.slice(1)||8097610000  //Augsburg   ?108111000
+b=location.search.slice(1)||dreg  //Augsburg   ?108111000
 if(1*b) {
 a=a.warnings[b]; var c=a
 a=a||"no warning"
@@ -47,8 +49,8 @@ if(c) showNotification(a[0].start) }
 else { // ?Ulm
   for (var x in a.warnings) {
     if (a.warnings[x][0].regionName.match(b)) {
-      document.getElementById("warn").innerHTML = JSON.stringify(a.warnings[x])
-      showNotification(a.warnings[x][0].start)
+      document.getElementById("warn").innerHTML = JSON.stringify(a.warnings[x])  //"<h3>"+a.warnings[x][0].headline+"</h3>"+a.warnings[x][0].description
+      if(a.warnings[x][0].level>=dlev) showNotification(a.warnings[x][0].start)
       document.getElementById("warn").title="last update: "+new Date(a.time).toTimeString()
       console.log(a.warnings[x].length+" warnings")
     }
