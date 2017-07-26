@@ -52,7 +52,7 @@ else { // ?Ulm
       document.getElementById("warn").innerHTML = "<h3>"+a.warnings[x][0].headline+"</h3>"+a.warnings[x][0].description  //JSON.stringify(a.warnings[x])
       if(a.warnings[x][0].level>=dlev) showNotification(a.warnings[x][0].start)
       document.getElementById("warn").title="last update: "+new Date(a.time).toTimeString()
-      console.log(a.warnings[x].length+" warnings")
+      console.log(a.warnings[x])  //.length+" warnings"
     }
   }
 }
