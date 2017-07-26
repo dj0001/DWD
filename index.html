@@ -26,7 +26,7 @@ function showNotification(tx) {
       navigator.serviceWorker.ready.then(function(registration) {
         registration.showNotification('Vibration Sample', {
           body: 'Buzz! '+new Date(tx).toTimeString(),  //Buzz!
-          icon: '../images/touch/chrome-touch-icon-192x192.png',
+          icon: 'orange.png',  //../images/touch/chrome-touch-icon-192x192.png
           vibrate: [200, 100, 200, 100, 200, 100, 200],
           tag: 'vibration-sample'
         });
