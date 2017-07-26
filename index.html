@@ -16,7 +16,7 @@ body {height:99%; font-family:Helvetica;background:#CCCCCC;}
 <span id="warn">no warning</span>
 
 <script>
-var dreg=8097610000, dlev=3  //Augsburg
+var dreg=109772000, dlev=3  //Augsburg 8097610000
 	
 navigator.serviceWorker.register('sw.js');
 	
@@ -49,7 +49,7 @@ if(c) showNotification(a[0].start) }
 else { // ?Ulm
   for (var x in a.warnings) {
     if (a.warnings[x][0].regionName.match(b)) {
-      document.getElementById("warn").innerHTML = JSON.stringify(a.warnings[x])  //"<h3>"+a.warnings[x][0].headline+"</h3>"+a.warnings[x][0].description
+      document.getElementById("warn").innerHTML = "<h3>"+a.warnings[x][0].headline+"</h3>"+a.warnings[x][0].description  //JSON.stringify(a.warnings[x])
       if(a.warnings[x][0].level>=dlev) showNotification(a.warnings[x][0].start)
       document.getElementById("warn").title="last update: "+new Date(a.time).toTimeString()
       console.log(a.warnings[x].length+" warnings")
