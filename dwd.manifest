@@ -1,0 +1,20 @@
+{
+	"short_name": "DWD",
+	"name": "DWD Warnwetter",
+	"display": "standalone",
+	"icons": [
+		{
+			"src": "orange.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		},
+		{
+			"src": "icon256.png",
+			"sizes": "256x256",
+			"type": "image/png"
+		}
+	],
+	"start_url": ".",
+	"theme_color": "#5ac1f2",
+	"background_color": "#383838"
+}
