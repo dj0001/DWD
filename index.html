@@ -38,7 +38,7 @@ function showNotification(tx) {
 if(typeof(Notification) != "undefined") Notification.requestPermission();  //
 var warnWetter = function(a) {}
 warnWetter.loadWarnings = function(a) { 
-b=location.search.slice(1)||dreg  //Augsburg   ?108111000
+b=decodeURI(location.search.slice(1))||dreg  //Augsburg   ?108111000
 if(1*b) {
 a=a.warnings[b]; var c=a
 a=a||"no warning"
