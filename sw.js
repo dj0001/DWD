@@ -13,7 +13,7 @@ self.addEventListener('notificationclick', function(event) {
 'use strict';
 
 const version = 'v1.01';
-const staticCachePrefix = 'gps-pd1-static-';
+const staticCachePrefix = 'dwd-pd1-static-';
 const staticCacheName = staticCachePrefix + version;
 
 self.addEventListener('install', event => {
@@ -22,7 +22,7 @@ self.addEventListener('install', event => {
             // cache all the static assets required for offline use.
             return cache.addAll([
                 './',
-                'index.htm'
+                'index.html'
             ]);
         }).then(() => {
             // activate the new service worker immediately, without waiting for next load.
