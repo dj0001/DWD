@@ -24,6 +24,20 @@ var dreg=109772000, dlev=3  //Augsburg 8097610000
 	
 navigator.serviceWorker.register('sw_pb.js');
 	
+navigator.serviceWorker.ready.then(function(registration) {
+  registration.periodicSync.register({
+    tag: 'get-latest-news',         // default: ''
+    minPeriod: 60 * 1000, // default: 0   //12 * 60 * 
+    powerState: 'auto',   // default: 'auto'   //avoid-draining
+    networkState: 'online'  // default: 'online'   //avoid-cellular
+  }).then(function(periodicSyncReg) {
+    console.log("dj")   // success
+  }, function() {
+    // failure
+  })
+});	
+
+	
 function showNotification(tx) {
   Notification.requestPermission(function(result) {
     if (result === 'granted') {
