@@ -24,8 +24,8 @@ var dreg=109772000, dlev=3  //Augsburg 8097610000
 	
 navigator.serviceWorker.register('sw_pb.js');
 	
-navigator.serviceWorker.ready.then(function(registration) {
-  registration.periodicSync.register({
+navigator.serviceWorker.ready.then(function(registration) { console.log(registration)
+  registration.periodicSync.register({   //cannot read property register of undefined
     tag: 'get-latest-news',         // default: ''
     minPeriod: 60 * 1000, // default: 0   //12 * 60 * 
     powerState: 'auto',   // default: 'auto'   //avoid-draining
