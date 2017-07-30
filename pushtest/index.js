@@ -22,7 +22,7 @@ navigator.serviceWorker.register('sw_pa.js')  //service-worker.js
   document.getElementById('curl').textContent = 'curl -H "TTL: 60" -X POST ' + endpoint;
 
   // Send the subscription details to the server using the Fetch API.
-  fetch('./register', {  //  need endpoint?!!!
+  fetch('https://android.googleapis.com/gcm/send', {  //  need endpoint?!!!./register
     method: 'post',
     headers: {
       'Content-type': 'application/json'
