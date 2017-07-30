@@ -22,7 +22,7 @@ navigator.serviceWorker.register('sw_pa.js')  //service-worker.js
   document.getElementById('curl').textContent = 'curl -H "TTL: 60" -X POST ' + endpoint;
 
   // Send the subscription details to the server using the Fetch API.
-  fetch('http://api.openweathermap.org/data/2.5/forecast/daily?q=Augsburg,de&units=metric&callback=test&lang=de&APPID=bc74c09718f9a37a61f1c58e046ac7f1', {  //./register
+  fetch('./register', {  //  need endpoint?!!!
     method: 'post',
     headers: {
       'Content-type': 'application/json'
