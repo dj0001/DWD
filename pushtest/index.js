@@ -22,7 +22,7 @@ navigator.serviceWorker.register('sw_pa.js')  //service-worker.js
   document.getElementById('curl').textContent = 'curl -H "TTL: 60" -X POST ' + endpoint;
 
   // Send the subscription details to the server using the Fetch API.
-  fetch('https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json', {  //./register
+  fetch('https://lh3.googleusercontent.com/iC47iekI2X1_dFpi53Lx1wx16kXjBXOI8Fo38h6hMVWU2UtuqY2V1D61QEsC1e0WQuzXkboOfg=h512-no', {  //./register
     method: 'post',
     headers: {
       'Content-type': 'application/json'
