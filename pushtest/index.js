@@ -27,9 +27,9 @@ navigator.serviceWorker.register('sw_pa.js')  //service-worker.js
     headers: {
       'Content-type': 'application/json'
     },
-    body: JSON.stringify({
-      endpoint: subscription.endpoint,
-    }),
+    //body: JSON.stringify({
+    //  endpoint: subscription.endpoint,
+    //}),
   });
 });
 
