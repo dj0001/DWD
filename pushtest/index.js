@@ -23,7 +23,7 @@ navigator.serviceWorker.register('sw_pa.js')  //service-worker.js
 
   // Send the subscription details to the server using the Fetch API.
   fetch('https://fcc-weather-api.glitch.me/api/current?lat=48.4&lon=10.9', {  //  ./register need endpoint?!!!
-    method: 'post',
+    method: 'get',  //post
     headers: {
       'Content-type': 'application/json'
     },
