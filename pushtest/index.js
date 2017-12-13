@@ -22,7 +22,7 @@ navigator.serviceWorker.register('sw_pa.js')  //service-worker.js
   document.getElementById('curl').textContent = 'curl -H "TTL: 60" -X POST ' + endpoint;
 
   // Send the subscription details to the server using the Fetch API.
-  fetch('https://fcc-weather-api.glitch.me/api/current?lat=48.4&lon=10.9', {  //  ./register need endpoint?!!!
+  fetch('https://maps.dwd.de/geoserver/dwd/wms/?REQUEST=GetFeatureInfo&SERVICE=WMS&SRS=EPSG%3A4326&STYLES=&TRANSPARENT=true&VERSION=1.1.1&FORMAT=image%2Fpng&BBOX=4.383544921875001%2C47.931066347509784%2C13.172607421875002%2C52.16045455774706&HEIGHT=600&WIDTH=800&LAYERS=dwd%3AWarnungen_Gemeinden_vereinigt&QUERY_LAYERS=dwd%3AWarnungen_Gemeinden_vereinigt&INFO_FORMAT=text%2Fjavascript&PROPERTYNAME=EVENT%2CONSET%2CEXPIRES%2CSENT&FEATURE_COUNT=50&X=392&Y=328&callback=parseResponse&_=1513179859204', {  //  https://fcc-weather-api.glitch.me/api/current?lat=48.4&lon=10.9
     method: 'get',  //post
     headers: {
       'Content-type': 'application/json'
