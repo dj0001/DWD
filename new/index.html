@@ -82,13 +82,14 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
 var bg=48.37, lg=10.89  //Breiten- und Längengrad für Augsburg
 
 //Standortabfrage anhand der Geolocation-API
-    navigator.geolocation.watchPosition(showPosition, function(err) {
+if(navigator.geolocation)    
+navigator.geolocation.watchPosition(showPosition, function(err) {
       console.log(err.message); start()  //User denied geolocation
     }, {
       enableHighAccuracy: false,
       timeout: 50000,
       maximumAge: 0
-    }); //getCurrent
+    }); else start();
 
 function showPosition(position) {  //console.log(position.coords)
 bg=position.coords.latitude  //Breitengrad
