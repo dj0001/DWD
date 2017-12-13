@@ -42,7 +42,7 @@ self.addEventListener('notificationclick', function(event) {
   event.notification.close();
 
   event.waitUntil(
-    clients.openWindow('http://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html')  //https://developers.google.com/web/
+    clients.openWindow('https://maps.dwd.de/geoserver/dwd/wms/?REQUEST=GetFeatureInfo&SERVICE=WMS&SRS=EPSG%3A4326&STYLES=&TRANSPARENT=true&VERSION=1.1.1&FORMAT=image%2Fpng&BBOX=4.383544921875001%2C47.931066347509784%2C13.172607421875002%2C52.16045455774706&HEIGHT=600&WIDTH=800&LAYERS=dwd%3AWarnungen_Gemeinden_vereinigt&QUERY_LAYERS=dwd%3AWarnungen_Gemeinden_vereinigt&INFO_FORMAT=text%2Fjavascript&PROPERTYNAME=EVENT%2CONSET%2CEXPIRES%2CSENT&FEATURE_COUNT=50&X=392&Y=328&callback=parseResponse&_=1513179859204')  //https://developers.google.com/web/  //http://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
   );
 });
 
