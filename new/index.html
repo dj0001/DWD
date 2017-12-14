@@ -78,7 +78,7 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
 		attribution: 'Geobasisdaten Gemeinden: &copy; <a href="http://www.bkg.de">BKG</a> 2015 (Daten verändert)'
 	});
 
-/* Ergänzung von dj */
+/* Ergänzung von dj
 var bg=48.37, lg=10.89  //Breiten- und Längengrad für Augsburg
 
 //Standortabfrage anhand der Geolocation-API
@@ -96,9 +96,9 @@ bg=position.coords.latitude  //Breitengrad
 lg=position.coords.longitude  //Längengrad
 start();  //Leaflet-Kartenobjekt erstellen
 }
-/* Ende Ergänzung von dj */
+   Ende Ergänzung von dj */
 
-function start(){  //Leaflet-Kartenobjekt nach der Benutzerabfrage erstellen
+//function start(){  //Leaflet-Kartenobjekt nach der Benutzerabfrage erstellen
 	// Leaflet-Kartenobjekt im referenzierten div erstellen und initiale Optionen für Karte übergeben
 	var karte = L.map('kartencontainer', {
 		// Mittelpunkt der Karte als Breiten- und Längengrad, bspw. 50.0956° N, 8.7761° E für Offenbach
@@ -126,7 +126,8 @@ function start(){  //Leaflet-Kartenobjekt nach der Benutzerabfrage erstellen
 	// Demo-Marker mit Popup hinzufügen
 	var marker = L.marker([bg, lg]).addTo(karte);
 	marker.bindPopup("<b>Deutscher Wetterdienst</b><br>Wetter und Klima aus einer Hand").openPopup();
-}
+//}   //Ende start
+karte.locate({setView: true, maxZoom: 16});  //Standortabfrage mit Leaflet
 </script>
 
 </body>
