@@ -19,6 +19,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     // Make an AJAX request to the server and hope for the best
     var url = this.getFeatureInfoUrl(evt.latlng),
         showResults = L.Util.bind(this.showGetFeatureInfo, this);
+    /*
     $.ajax({
       url: url,
       success: function (data, status, xhr) {
@@ -29,6 +30,25 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
         showResults(error);  
       }
     });
+    */
+  fetch(url)  //nicht genutzt?
+  .then(  
+    function(response) {  
+      if (response.status !== 200) {  //oder weglassen 
+        console.log('Status Code: ' + response.status);  
+        return;  
+      }  
+      response.json().then(function(data) {  //return response.text()  //response.text().then(function (text) {}
+        //console.log(data);
+        var err = typeof data === 'string' ? null : data;
+        showResults(err, evt.latlng, data); 
+      });  
+    }  
+  )  
+  .catch(function(error) {  
+    showResults(error) //console.log(err);  
+  });
+    
   },
   
   // Warnmodul2: JSONP-Version der getFeatureInfo-Funktion
@@ -36,6 +56,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     // Make an AJAX request to the server and hope for the best
     var url = this.getFeatureInfoUrl(evt.latlng),
         showResultsJson = L.Util.bind(this.showGetFeatureInfoJson, this);
+    /*
     $.ajax({
       url: url,
       dataType: 'jsonp',
@@ -45,6 +66,16 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
         showResultsJson(evt.latlng, data);
       }
     });
+    */
+    window.parseResponse = function(data) { //console.log(data)
+    // handle requested data from server
+    showResultsJson(evt.latlng, data)
+};
+
+var scriptEl = document.createElement('script');
+scriptEl.setAttribute('src', url);  //url + '&callback=parseResponse'
+document.body.appendChild(scriptEl);
+    
   },
 
 
@@ -94,7 +125,8 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
   showGetFeatureInfoJson: function (latlng, data) {
     if ( data.features[0] == null ) { return 0 };
     var content="<h2>Amtliche Warnung</h2>";
-    $.each(data.features, function (i, item) {
+    //$.each(data.features, function (i, item) {
+    data.features.forEach(function(item){
             var o = new Date(item.properties.ONSET);
             var e = new Date(item.properties.EXPIRES);
             onset = ('0' + o.getDate()).slice(-2) + '.' + ('0' + (o.getMonth()+1)).slice(-2) + ". - " + ('0' + (o.getHours())).slice(-2) + ":" + ('0' + (o.getMinutes())).slice(-2) + " Uhr";
