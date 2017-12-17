@@ -113,9 +113,10 @@ var bg=48.37, lg=10.89  //Breiten- und Längengrad für Augsburg
 	marker.bindPopup("<b>Deutscher Wetterdienst</b><br>Wetter und Klima aus einer Hand").openPopup();
 //}   //Ende start
 karte.locate({setView: true, maxZoom: 8});  //Standortabfrage mit Leaflet  //maxZoom: 16
-setInterval(function(){warnlayer.redraw()}, 300000)  //alle 5 min
+//setInterval(function(){warnlayer.redraw()}, 300000)  //alle 5 min
 
-	function onLocationFound(e) {console.log(e.latlng); L.TileLayer.BetterWMS.prototype.getFeatureInfoJsonp(e)}  //
+	function onLocationFound(e) {console.log(e.latlng); L.TileLayer.BetterWMS.prototype.getFeatureInfoJsonp(e)
+	setInterval(function(){warnlayer.redraw();L.TileLayer.BetterWMS.prototype.getFeatureInfoJsonp(e)}, 3000)}  //alle 5 min
 	karte.on('locationfound', onLocationFound);
 
 function showNotification(tx) {
