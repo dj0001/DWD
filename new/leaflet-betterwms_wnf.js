@@ -70,7 +70,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     window.parseResponse = function(data) { console.log(data.features.length)
     // handle requested data from server
     showResultsJson(evt.latlng, data)
-    showNotification(data.features.length)  //
+    if(data.features.length) showNotification(data.features.length)  //
 };
 
 var scriptEl = document.createElement('script');
