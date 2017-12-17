@@ -116,7 +116,7 @@ karte.locate({setView: true, maxZoom: 8});  //Standortabfrage mit Leaflet  //max
 //setInterval(function(){warnlayer.redraw()}, 300000)  //alle 5 min
 
 	function onLocationFound(e) {console.log(e.latlng); L.TileLayer.BetterWMS.prototype.getFeatureInfoJsonp(e)
-	setInterval(function(){warnlayer.redraw();L.TileLayer.BetterWMS.prototype.getFeatureInfoJsonp(e)}, 300000)}  //alle 5 min
+	setInterval(function(){warnlayer.redraw();}, 300000)}  //alle 5 min L.TileLayer.BetterWMS.prototype.getFeatureInfoJsonp(e)
 	karte.on('locationfound', onLocationFound);
 
 function showNotification(tx) {
