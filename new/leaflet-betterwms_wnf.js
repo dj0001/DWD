@@ -73,7 +73,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     showResultsJson(evt.latlng, data)
     if(data.features.length){
     var severity=["Minor","Moderate","Severe","Extreme"], warnlev=location.search.slice(1);  //querystringparameter ?warnlevel e.g. ?1  
-    if(data.features.map(function(obj){return obj.properties.SEVERITY}).some(x => severity.indexOf(x) >= warnlev)) showNotification(data.features.length)  //
+    if(data.features.map(function(obj){return obj.properties.SEVERITY}).some(function(x){return (severity.indexOf(x) >= warnlev)})) showNotification(data.features.length)  //x => severity.indexOf(x) >= warnlev
     }
     clearTimeout(tID); tID=setTimeout(function(){L.TileLayer.BetterWMS.prototype.getFeatureInfoJsonp(evt);}, 300000)  //
 };
