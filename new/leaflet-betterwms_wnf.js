@@ -80,7 +80,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 
 var scriptEl = document.createElement('script');
 scriptEl.setAttribute('src', url);  //url + '&callback=parseResponse'
-document.body.appendChild(scriptEl);
+document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0])  //document.body.appendChild(scriptEl);
     
   },
 
