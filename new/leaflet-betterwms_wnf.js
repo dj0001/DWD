@@ -71,7 +71,11 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     window.parseResponse = function(data) { //console.log(data.features.length)
     // handle requested data from server
     showResultsJson(evt.latlng, data)
-    if(data.features.length) showNotification(data.features.length)  //
+    if(data.features.length){
+    var tmp, severity=["Minor","Moderate","Severe","Extreme"], warnlev=location.search.slice(1);  //querystringparameter ?warnlevel e.g. ?1  
+    data.features.forEach(function(item){if(severity.indexOf(item.properties.SEVERITY)>=warnlev) tmp=1;})  
+    if(tmp) showNotification(data.features.length)  //
+    }
     clearTimeout(tID); tID=setTimeout(function(){L.TileLayer.BetterWMS.prototype.getFeatureInfoJsonp(evt);}, 300000)  //
 };
 
@@ -102,7 +106,7 @@ document.body.appendChild(scriptEl);
           query_layers: thise.wmsParams.layers,
           info_format: 'text/javascript',
           // Warnmodul2: nur ausgewählte Properties werden abgefragt - eine ungefilterte Antwort liefert eine Vielzahl weiterer Eigenschaften der Warnungen, analog zum Inhalt im CAP-Format
-          propertyName: 'EVENT,ONSET,EXPIRES,SENT',
+          propertyName: 'EVENT,ONSET,EXPIRES,SENT,SEVERITY',  //,SEVERITY
           // Warnmodul2: FEATURE_COUNT > 1 notwendig, um im Falle überlappender Warnungen alle Warnungen abzufragen
           FEATURE_COUNT: 50
         };
