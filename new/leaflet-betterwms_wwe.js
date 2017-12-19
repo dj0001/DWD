@@ -40,6 +40,11 @@ var scriptEl = document.createElement('script');
 scriptEl.setAttribute('src', url);  //url + '&callback=parseResponse'
 document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0])  //document.body.appendChild(scriptEl);
 //console.log(sun(evt.latlng.lat,evt.latlng.lng,new Date(),1))
+
+window.test = function(data) {if(typeof(popup)!="undefined") popup.setContent(popup.getContent()+" "+data.main.temp+"\u00B0C")}  //console.log(data.main.temp); 
+scriptEl = document.createElement('script');
+scriptEl.src = "http://api.openweathermap.org/data/2.5/weather?lat="+evt.latlng.lat+"&lon="+evt.latlng.lng+"&units=metric&callback=test&lang=de&APPID=bd5e378503939ddaee76f12ad7a97608"  // forecast/daily replace APPID
+document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0])  //
   },
 
 
@@ -101,9 +106,9 @@ document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0]) 
             //content += "Gesendet: " + item.properties.SENT + "</p>";
     });
     content += "<a target='blank' href='https://www.dwd.de/warnungen'>www.dwd.de/warnungen</a>";
-    content += "<br>\u25D2 "+sun(latlng.lat,latlng.lng,new Date(),1)  //
+    content += "<br>"+sun(latlng.lat,latlng.lng,new Date(),1)+"\u25D2 "  //
 
-    L.popup({ maxWidth: 800})
+    popup = L.popup({ maxWidth: 800})  //var 
       .setLatLng(latlng)
       .setContent(content)
       .openOn(this._map);
