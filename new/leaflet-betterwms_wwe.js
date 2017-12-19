@@ -43,7 +43,7 @@ document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0]) 
 
 window.test = function(data) {if(typeof(popup)!="undefined") popup.setContent(popup.getContent()+" "+data.main.temp+"\u00B0C")}  //console.log(data.main.temp); 
 scriptEl = document.createElement('script');
-scriptEl.src = "http://api.openweathermap.org/data/2.5/weather?lat="+evt.latlng.lat+"&lon="+evt.latlng.lng+"&units=metric&callback=test&lang=de&APPID=bd5e378503939ddaee76f12ad7a97608"  // forecast/daily replace APPID
+scriptEl.src = "https://api.openweathermap.org/data/2.5/weather?lat="+evt.latlng.lat+"&lon="+evt.latlng.lng+"&units=metric&callback=test&lang=de&APPID=bd5e378503939ddaee76f12ad7a97608"  // forecast/daily replace APPID
 document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0])  //
   },
 
