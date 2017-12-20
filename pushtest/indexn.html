@@ -54,7 +54,7 @@ navigator.serviceWorker.register('sw.js')
     console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
     //return pushSubscription;
 
-fetch('https://fcc-weather-api.glitch.me/api', {  //Server  /api/save-subscription/
+fetch('https://fcc-weather-api.glitch.me/api/current?lat=48.37&lon=10.89', {  //Server  /api/save-subscription/  api/
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
