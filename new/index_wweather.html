@@ -73,7 +73,26 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
 		attribution: 'Geobasisdaten Gemeinden: &copy; <a href="http://www.bkg.de">BKG</a> 2015 (Daten verändert)'
 	});
 
-var bg=48.37, lg=10.89  //Breiten- und Längengrad für Augsburg
+var NASAGIBS_ModisTerraSnowCover = L.tileLayer('https://map1.vis.earthdata.nasa.gov/wmts-webmerc/MODIS_Terra_Snow_Cover/default/{time}/{tilematrixset}{maxZoom}/{z}/{y}/{x}.{format}', {
+	attribution: 'Imagery provided by services from the Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/Earth Science Data and Information System (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.',
+	bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
+	minZoom: 1,
+	maxZoom: 8,
+	format: 'png',
+	time: '',
+	tilematrixset: 'GoogleMapsCompatible_Level',
+	opacity: 0.75
+})  //.addTo(karte);
+
+var apikey='bd5e378503939ddaee76f12ad7a97608';  //replace APPID
+var OpenWeatherMap_Clouds = L.tileLayer('https://{s}.tile.openweathermap.org/map/temp/{z}/{x}/{y}.png?appid={apiKey}', {  //clouds
+	maxZoom: 8,   //19
+	attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+	apiKey: apikey,
+	opacity: 0.5
+})
+	
+	var bg=48.37, lg=10.89  //Breiten- und Längengrad für Augsburg
 
 	// Leaflet-Kartenobjekt im referenzierten div erstellen und initiale Optionen für Karte übergeben
 	var karte = L.map('kartencontainer', {
@@ -92,7 +111,9 @@ var bg=48.37, lg=10.89  //Breiten- und Längengrad für Augsburg
 	};
 	var overLayers = {
 			"<span title='DWD Geoserver dwd:Warnungen_Gemeinden_vereinigt'>Gemeinde vereinigt</span>": warnlayer.addTo(karte),
-			"<span title='DWD Geoserver Gemeindewarngebiete'>Warngebiete (Gemeinden)</span>": gemeindelayer
+			"<span title='DWD Geoserver Gemeindewarngebiete'>Warngebiete (Gemeinden)</span>": gemeindelayer,
+			"<span title='OpenWeatherMap temp'>Temperatur</span>": OpenWeatherMap_Clouds,
+			"<span title='NASAGIBS_ModisTerraSnowCover'>Snow</span>": NASAGIBS_ModisTerraSnowCover
 	};
 	// Layercontrol-Element erstellen und hinzufügen
     L.control.layers(baseLayers, overLayers).addTo(karte);
