@@ -123,7 +123,7 @@ karte.locate({setView: true, maxZoom: 8});  //Standortabfrage mit Leaflet  //max
 	karte.on('locationfound', onLocationFound);
 
 	
-	navigator.serviceWorker.register('sw.js');  //needed?
+	navigator.serviceWorker.register('sw.js');  //needed (only for desktop?)
 	
 function showNotification(tx) {
   Notification.requestPermission(function(result) {
