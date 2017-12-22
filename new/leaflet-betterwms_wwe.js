@@ -32,7 +32,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     if(data.features.length){
     var severity=["Minor","Moderate","Severe","Extreme"], warnlev=decodeURI(location.search.slice(1));
     if(isNaN(warnlev)?
-    data.features.map(function(obj){return obj.properties.EVENT}).some(function(x){return (x == warnlev)}) :   //querystringparameter ?ereignis e.g. ?GLÄTTE
+    data.features.map(function(obj){return obj.properties.EVENT}).some(function(x){return (warnlev.split(",").indexOf(x)+1)}) :   //querystringparameter ?ereignis e.g. ?GLÄTTE
     data.features.map(function(obj){return obj.properties.SEVERITY}).some(function(x){return (severity.indexOf(x) >= warnlev)}))  //  ?warnlevel e.g. ?1
      showNotification(data.features.length)
     }
