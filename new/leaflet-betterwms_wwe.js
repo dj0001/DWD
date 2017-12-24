@@ -95,6 +95,7 @@ document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0]) 
 
   // Warnmodul2: angepasste Funktion zum Aufbereiten der Geoserver-Antwort (Auswahl von bestimmten properties) und zur Anzeige als Popup
   showGetFeatureInfoJson: function (latlng, data) {
+    marker.unbindPopup(); marker.setLatLng(latlng)  //feedback
     if ( data.features[0] == null ) { return 0 };
     var content="<h2>Amtliche Warnung</h2>";
     //$.each(data.features, function (i, item) {
