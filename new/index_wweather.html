@@ -101,7 +101,8 @@ var OpenWeatherMap_Clouds = L.tileLayer('https://{s}.tile.openweathermap.org/map
 		attribution: 'Satellitenbild METEOSAT (RGB) Europa Zentral: &copy; <a href="http://www.dwd.de">DWD</a>'
 	});
 
-	var bg=48.37, lg=10.89  //Breiten- und Längengrad für Augsburg
+	var LatLng = JSON.parse(localStorage.LatLng || '{"lat": 48.37, "lng": 10.89}')
+	var bg=LatLng.lat, lg=LatLng.lng  //Breiten- und Längengrad für Augsburg
 
 	// Leaflet-Kartenobjekt im referenzierten div erstellen und initiale Optionen für Karte übergeben
 	var karte = L.map('kartencontainer', {
@@ -165,6 +166,7 @@ Untergang  = Untergang - Laenge /15.0 + -new Date().getTimezoneOffset()/60;  //Z
 Untergang  = Math.floor(Untergang) + ":" + Math.round(Untergang%1*60)
 return Untergang
  }
+window.onunload = function(){if(marker.getLatLng()) localStorage.LatLng=JSON.stringify(marker.getLatLng())}  //remember marker
 </script>
 
 </body>
