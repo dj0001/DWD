@@ -42,6 +42,7 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
 
 
 <script>
+	var filter=false; //edit here; filter karte mit querystringparameter ?ereignis e.g. ?GLÄTTE
 	// OSM-Hintergrundslayer definieren  //http:
 	var osmlayer =  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: 'Map data: &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
@@ -60,6 +61,7 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
 	// CQL_FILTER können benutzt werden um angezeigte Warnungen zu filtern (http://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html)
 	// Filterung kann auf Basis der verschiedenen properties der Warnungen erfolgen (bspw. EC_II, EC_GROUP, DESCRIPTION ... ) siehe https://www.dwd.de/DE/wetter/warnungen_aktuell/objekt_einbindung/einbindung_karten_geowebservice.pdf
  	// warnlayer.setParams({CQL_FILTER:"DESCRIPTION LIKE '%Sturm%'"});
+	var tmp=decodeURI(location.search.slice(1)); if(filter && isNaN(tmp)) warnlayer.setParams({CQL_FILTER:"EVENT LIKE '%"+tmp+"%'"})  //
  	// Filter können zur Laufzeit, z.B. über Nutzereingaben angepasst werden
  	//delete warnlayer.wmsParams.CQL_FILTER;
  	//warnlayer.redraw();
