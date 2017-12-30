@@ -24,7 +24,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
   getFeatureInfoJsonp: function (evt) {
     // Make an AJAX request to the server and hope for the best
     var url = this.getFeatureInfoUrl(evt.latlng),
-        showResultsJson = L.Util.bind(this.showGetFeatureInfoJson, warnlayer);  // , this
+        showResultsJson = L.Util.bind(this.showGetFeatureInfoJson, this);  // , warnlayer
 
     window.parseResponse = function(data) {
     // handle requested data from server
@@ -36,7 +36,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     data.features.map(function(obj){return obj.properties.SEVERITY}).some(function(x){return (severity.indexOf(x) >= warnlev)}))  //  ?warnlevel e.g. ?1
      showNotification(data.features.length)
     }
-    clearTimeout(tID); tID=setTimeout(function(){L.TileLayer.BetterWMS.prototype.getFeatureInfoJsonp(evt);}, 300000)  //
+    clearTimeout(tID); tID=setTimeout(function(){warnlayer.getFeatureInfoJsonp(evt);}, 300000)  //L.TileLayer.BetterWMS.prototype
 };
 
 var scriptEl = document.createElement('script');
@@ -51,24 +51,24 @@ document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0]) 
   },
 
 
-  getFeatureInfoUrl: function (latlng) { var thise=warnlayer
+  getFeatureInfoUrl: function (latlng) { //var thise=warnlayer
     // Construct a GetFeatureInfo request URL given a point
-    var point = thise._map.latLngToContainerPoint(latlng, thise._map.getZoom()),
-        size = thise._map.getSize(),
+    var point = this._map.latLngToContainerPoint(latlng, this._map.getZoom()),
+        size = this._map.getSize(),
         
         params = {
           request: 'GetFeatureInfo',
           service: 'WMS',
           srs: 'EPSG:4326',
-          styles: thise.wmsParams.styles,
-          transparent: thise.wmsParams.transparent,
-          version: thise.wmsParams.version,      
-          format: thise.wmsParams.format,
-          bbox: thise._map.getBounds().toBBoxString(),
+          styles: this.wmsParams.styles,
+          transparent: this.wmsParams.transparent,
+          version: this.wmsParams.version,      
+          format: this.wmsParams.format,
+          bbox: this._map.getBounds().toBBoxString(),
           height: size.y,
           width: size.x,
-          layers: thise.wmsParams.layers,
-          query_layers: thise.wmsParams.layers,
+          layers: this.wmsParams.layers,
+          query_layers: this.wmsParams.layers,
           info_format: 'text/javascript',
           // Warnmodul2: nur ausgewählte Properties werden abgefragt - eine ungefilterte Antwort liefert eine Vielzahl weiterer Eigenschaften der Warnungen, analog zum Inhalt im CAP-Format
           propertyName: 'EVENT,ONSET,EXPIRES,SENT,SEVERITY',  //,SEVERITY
@@ -79,7 +79,7 @@ document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0]) 
     params[params.version === '1.3.0' ? 'i' : 'x'] = Math.round(point.x);  //point.x
     params[params.version === '1.3.0' ? 'j' : 'y'] = Math.round(point.y);  //point.y
     
-    return thise._url + L.Util.getParamString(params, thise._url, true);
+    return this._url + L.Util.getParamString(params, this._url, true);
   },
   
   showGetFeatureInfo: function (err, latlng, content) {  //not used?
