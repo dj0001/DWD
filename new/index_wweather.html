@@ -134,7 +134,7 @@ var OpenWeatherMap_Clouds = L.tileLayer('https://{s}.tile.openweathermap.org/map
 
 karte.locate({setView: true, maxZoom: 8});  //Standortabfrage mit Leaflet  //maxZoom: 16
 //setInterval(function(){warnlayer.redraw()}, 300000)  //alle 5 min
-function onLocationFound(e) {console.log(e.latlng); L.TileLayer.BetterWMS.prototype.getFeatureInfoJsonp(e)
+function onLocationFound(e) {console.log(e.latlng); warnlayer.getFeatureInfoJsonp(e)  //L.TileLayer.BetterWMS.prototype
 	setInterval(function(){warnlayer.setUrl("https://maps.dwd.de/geoserver/dwd/wms/?" + Math.random())}, 3*300000)}  //alle 5 min ; warnlayer.redraw()
 karte.on('locationfound', onLocationFound);
 	
