@@ -71,7 +71,7 @@ document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0]) 
           query_layers: this.wmsParams.layers,
           info_format: 'text/javascript',
           // Warnmodul2: nur ausgewählte Properties werden abgefragt - eine ungefilterte Antwort liefert eine Vielzahl weiterer Eigenschaften der Warnungen, analog zum Inhalt im CAP-Format
-          propertyName: 'EVENT,ONSET,EXPIRES,SENT,SEVERITY',  //,SEVERITY
+          propertyName: 'EVENT,ONSET,EXPIRES,SENT,SEVERITY,EC_GROUP',  //,SEVERITY
           // Warnmodul2: FEATURE_COUNT > 1 notwendig, um im Falle überlappender Warnungen alle Warnungen abzufragen
           FEATURE_COUNT: 50
         };
@@ -104,12 +104,12 @@ document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0]) 
             var e = new Date(item.properties.EXPIRES);
             onset = ('0' + o.getDate()).slice(-2) + '.' + ('0' + (o.getMonth()+1)).slice(-2) + ". - " + ('0' + (o.getHours())).slice(-2) + ":" + ('0' + (o.getMinutes())).slice(-2) + " Uhr";
             end = ('0' + e.getDate()).slice(-2) + '.' + ('0' + (e.getMonth()+1)).slice(-2) + ". - " + ('0' + (e.getHours())).slice(-2) + ":" + ('0' + (e.getMinutes())).slice(-2) + " Uhr" ;
-            content += "<p><table><tr><td>Ereignis:</td><td><b>" + item.properties.EVENT + "</b></td></tr>";
+            content += "<p><table style='background: no-repeat left/contain url(\"icons/"+item.properties.EC_GROUP+".png\")'><tr><td>Ereignis:</td><td><b>" + item.properties.EVENT + "</b></td></tr>";
             content += "<tr><td>Beginn:</td><td>" + onset + "</td></tr>";
             content += "<tr><td>Ende:</td><td>" + end + "</td></tr></table></p>";
             //content += "Gesendet: " + item.properties.SENT + "</p>";
     });
-    content += "<a target='blank' href='https://www.dwd.de/warnungen'>www.dwd.de/warnungen</a>";
+    content += "<a target='blank' href='https://maps.dwd.de/geoserver/wms?REQUEST=GetLegendGraphic&version=1.3&format=image/png&width=20&height=20&layer=dwd:Warnungen_Gemeinden'>www.dwd.de/warnungen</a>";
     content += "<br>"+sun(latlng.lat,latlng.lng,new Date(),1)+"\u25D2 "  //
 
     popup = L.popup({ maxWidth: 800})  //var 
