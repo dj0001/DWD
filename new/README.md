@@ -5,3 +5,5 @@ Standortabfrage mit Leaflet
 autoupdate  
 removed jquery  
 works on mobile (bugfix)  
+
+wweather adds weather, sat, icons
