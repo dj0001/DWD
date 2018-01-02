@@ -103,7 +103,7 @@ var OpenWeatherMap_Clouds = L.tileLayer('https://{s}.tile.openweathermap.org/map
 		attribution: 'Satellitenbild METEOSAT (RGB) Europa Zentral: &copy; <a href="http://www.dwd.de">DWD</a>'
 	});
 
-	var LatLng = JSON.parse(localStorage.LatLng || '{"lat": 48.37, "lng": 10.89}')
+	var LatLng = JSON.parse((typeof(localStorage)!="undefined"?localStorage.LatLng:0) || '{"lat": 48.37, "lng": 10.89}')
 	var bg=LatLng.lat, lg=LatLng.lng  //Breiten- und Längengrad für Augsburg
 
 	// Leaflet-Kartenobjekt im referenzierten div erstellen und initiale Optionen für Karte übergeben
