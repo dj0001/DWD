@@ -111,7 +111,8 @@ document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0]) 
             content += "<tr><td>Ende:</td><td style='background:white'>" + end + "</td></tr></table></p>";
             //content += "Gesendet: " + item.properties.SENT + "</p>";
     });
-    content += "<a target='blank' href='https://maps.dwd.de/geoserver/wms?REQUEST=GetLegendGraphic&version=1.3&format=image/png&width=20&height=20&layer=dwd:Warnungen_Gemeinden'>www.dwd.de/warnungen</a>";
+    var akt = new Date().toLocaleTimeString('de',{hour:"2-digit",minute:"2-digit"})
+    content += "<a title='um "+akt+"' target='blank' href='https://maps.dwd.de/geoserver/wms?REQUEST=GetLegendGraphic&version=1.3&format=image/png&width=20&height=20&layer=dwd:Warnungen_Gemeinden'>www.dwd.de/warnungen</a>";
     content += "<br>"+sun(latlng.lat,latlng.lng,new Date(),1)+"\u25D2 "  //
 
     popup = L.popup({ maxWidth: 800})  //var 
