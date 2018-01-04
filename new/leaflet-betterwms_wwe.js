@@ -113,7 +113,7 @@ document.head.replaceChild(scriptEl,document.getElementsByTagName("script")[0]) 
     });
     var akt = new Date().toLocaleTimeString('de',{hour:"2-digit",minute:"2-digit"})
     content += "<a title='um "+akt+"' target='blank' href='https://maps.dwd.de/geoserver/wms?REQUEST=GetLegendGraphic&version=1.3&format=image/png&width=20&height=20&layer=dwd:Warnungen_Gemeinden'>www.dwd.de/warnungen</a>";
-    content += "<br>"+sun(latlng.lat,latlng.lng,new Date(),1)+"\u25D2 "  //
+    content += "<br>"+L.sun.sunset(latlng)+"\u25D2 "  //sun(latlng.lat,latlng.lng,new Date(),1)
 
     popup = L.popup({ maxWidth: 800})  //var 
       .setLatLng(latlng)
