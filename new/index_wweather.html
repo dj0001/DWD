@@ -33,6 +33,7 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
 	Die Funktionen wurden angepasst, um JSONP-Anfragen durchzuführen und ausgewählte Elemente der Feature-Info im Popup darzustellen; Änderungen sind in leaflet-betterwms.js entsprechen markiert
 	-->
 	<script src="./leaflet-betterwms_wwe.js"></script>
+	<script src="https://dj0001.github.io/Leaflet.Sun/L.Sun.js"></script> <!-- plugin -->
 
 </head>
 <body>
@@ -158,16 +159,7 @@ function showNotification(tx) {
 }
 if(typeof(Notification) != "undefined") Notification.requestPermission();  //
 
-function sun(Breite,Laenge,T,s) {  //s=1=sunset; s=-1=sunrise
-var RAD = Math.PI/180.0, h = -(50.0/60.0)*RAD, B = Breite*RAD;
-T = Math.ceil((T - new Date(T.getFullYear(), 0, 1)) / 86400000)  //Tag im Jahr
-	var DK = 0.4095*Math.sin(0.016906*(T-80.086))  //sonnendeklination(T);
-	var Untergang  = 12 + s* (12.0*Math.acos((Math.sin(h) - Math.sin(B)*Math.sin(DK)) / (Math.cos(B)*Math.cos(DK)))/Math.PI) - 
-	(-0.171*Math.sin(0.0337 * T + 0.465) - 0.1299*Math.sin(0.01787*T - 0.168))  //12+(-)zeitdifferenz(DK) - zeitgleichung(T);
-Untergang  = Untergang - Laenge /15.0 + -new Date().getTimezoneOffset()/60;  //Zone
-Untergang  = Math.floor(Untergang) + ":" + Math.round(Untergang%1*60)
-return Untergang
- }
+//removed function sun
 window.onunload = function(){if(marker.getLatLng()) localStorage.LatLng=JSON.stringify(marker.getLatLng())}  //remember marker
 </script>
 
