@@ -6,4 +6,4 @@ autoupdate
 removed jquery  
 works on mobile (bugfix)  
 
-wweather adds weather, sat, icons
+wweather adds weather, sat, icons, geocode
