@@ -44,6 +44,7 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
 
 <script>
 	var filter=true; //edit here; filter karte mit querystringparameter ?ereignis e.g. ?GLÄTTE
+	var tID;  //timer
 	// OSM-Hintergrundslayer definieren  //http:
 	var osmlayer =  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: 'Map data: &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
@@ -160,6 +161,12 @@ function showNotification(tx) {
 if(typeof(Notification) != "undefined") Notification.requestPermission();  //
 
 //removed function sun
+	function onMapClick(e) {
+	clearTimeout(tID); tID=setTimeout(function(){warnlayer.getFeatureInfoJsonp({latlng:e.latlng})}, 300000) }
+
+	//karte.on('popupopen', onMapClick);  //map
+	marker.on('move', onMapClick);  //listener for timeout
+
 window.onunload = function(){if(marker.getLatLng()) localStorage.LatLng=JSON.stringify(marker.getLatLng())}  //remember marker
 </script>
 
