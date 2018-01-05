@@ -167,6 +167,38 @@ if(typeof(Notification) != "undefined") Notification.requestPermission();  //
 	//karte.on('popupopen', onMapClick);  //map
 	marker.on('move', onMapClick);  //listener for timeout
 
+
+	L.Control.Watermark = L.Control.extend({  //image for geocode
+		onAdd: function(map) {
+			var img = L.DomUtil.create('img');
+			img.src = 'icons/geocoder.png';
+			img.style.background = 'white';  //img.style.width = '200px';
+			
+			L.DomEvent.on(img, 'click', this._geocode, this);  //handler
+			L.DomEvent.disableClickPropagation(img)
+			
+			return img;
+		},
+		_geocode: function(ev) {
+		  var q = prompt("Ort", ""); if (q) {
+		    fetch("https://nominatim.openstreetmap.org/search?q=" + q + "&format=json")
+		      .then(function(response) {
+		        response.json().then(function(data) {
+		          onLocationFound({latlng: {lat: data[0].lat,lng: data[0].lon}
+		          })
+		        })
+		      })
+		  }
+		}
+		//, onRemove: function(map) { }   // Nothing to do here
+	});
+
+	L.control.watermark = function(opts) {
+		return new L.Control.Watermark(opts);
+	}
+	
+	L.control.watermark({ position: 'bottomright' }).addTo(karte);  //map  bottomleft
+
 window.onunload = function(){if(marker.getLatLng()) localStorage.LatLng=JSON.stringify(marker.getLatLng())}  //remember marker
 </script>
 
