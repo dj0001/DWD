@@ -183,7 +183,7 @@ if(typeof(Notification) != "undefined") Notification.requestPermission();  //
 		  var q = prompt("Ort", ""); if (q) {
 		    fetch("https://nominatim.openstreetmap.org/search?q=" + q + "&format=json")
 		      .then(function(response) {
-		        response.json().then(function(data) {
+		        response.json().then(function(data) { karte.setView({lat: data[0].lat,lng: data[0].lon})  //Bounds in GetFeatureInfo
 		          onLocationFound({latlng: {lat: data[0].lat,lng: data[0].lon}
 		          })
 		        })
