@@ -1,5 +1,5 @@
 // Änderungen für das DWD-Warnmodul2 wurden mit "// Warnmodul2:" markiert
-var tID;  //timer
+//var tID;  //timer
 L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
   
   onAdd: function (map) {
@@ -36,7 +36,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     data.features.map(function(obj){return obj.properties.SEVERITY}).some(function(x){return (severity.indexOf(x) >= warnlev)}))  //  ?warnlevel e.g. ?1
      showNotification(data.features.length)
     }
-    clearTimeout(tID); tID=setTimeout(function(){warnlayer.getFeatureInfoJsonp(evt);}, 300000)  //L.TileLayer.BetterWMS.prototype
+    //clearTimeout(tID); tID=setTimeout(function(){warnlayer.getFeatureInfoJsonp(evt);}, 300000)  //L.TileLayer.BetterWMS.prototype
 };
 
 var scriptEl = document.createElement('script');
