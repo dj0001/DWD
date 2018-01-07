@@ -106,12 +106,12 @@ var OpenWeatherMap_Clouds = L.tileLayer('https://{s}.tile.openweathermap.org/map
 	});
 
 	var LatLng = JSON.parse((typeof(localStorage)!="undefined"?localStorage.LatLng:0) || '{"lat": 48.37, "lng": 10.89}')
-	var bg=LatLng.lat, lg=LatLng.lng  //Breiten- und Längengrad für Augsburg
+	//var bg=LatLng.lat, lg=LatLng.lng  //Breiten- und Längengrad für Augsburg
 
 	// Leaflet-Kartenobjekt im referenzierten div erstellen und initiale Optionen für Karte übergeben
 	var karte = L.map('kartencontainer', {
 		// Mittelpunkt der Karte als Breiten- und Längengrad, bspw. 50.0956° N, 8.7761° E für Offenbach
-		center: [bg, lg],
+		center: [LatLng.lat, LatLng.lng],
 		// initiales Zoomlevel
 		zoom: 7, 
 		// interaktivität der Karte kann mit Optionen gesteuert werden
@@ -133,7 +133,7 @@ var OpenWeatherMap_Clouds = L.tileLayer('https://{s}.tile.openweathermap.org/map
 	// Layercontrol-Element erstellen und hinzufügen
     L.control.layers(baseLayers, overLayers).addTo(karte);
 	// Demo-Marker mit Popup hinzufügen
-	var marker = L.marker([bg, lg]).addTo(karte);
+	var marker = L.marker([LatLng.lat, LatLng.lng]).addTo(karte);
 	marker.bindPopup("<b>Deutscher Wetterdienst</b><br>Wetter und Klima aus einer Hand").openPopup();
 
 karte.locate({setView: true, maxZoom: 8});  //Standortabfrage mit Leaflet  //maxZoom: 16
