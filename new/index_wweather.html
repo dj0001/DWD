@@ -52,7 +52,7 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
 	});
 	// Warnungs-Layer vom DWD-Geoserver - betterWms fügt Möglichkeiten zur GetFeatureInfo hinzu
 	var warnlayer = L.tileLayer.betterWms("https://maps.dwd.de/geoserver/dwd/wms/", {
-		layers: 'dwd:Warnungen_Gemeinden_vereinigt',
+		layers: 'Warnungen_Gemeinden_vereinigt',  //dwd:
 		// eigene Styled Layer Descriptor (SLD) können zur alternativen Anzeige der Warnungen genutzt werden (http://docs.geoserver.org/stable/en/user/styling/sld/reference/)
 		//sld: 'http://eigenerserver/alternativer.sld',
 		format: 'image/png',
@@ -69,9 +69,9 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
  	//warnlayer.redraw();
  	// Layer mit neutraler Darstellung der Gemeinde-Warngebiete
 	var gemeindelayer = L.tileLayer.wms("https://maps.dwd.de/geoserver/dwd/wms/", {
-		layers: 'dwd:Warngebiete_Gemeinden',
+		layers: 'Warngebiete_Gemeinden',  //dwd:
 		format: 'image/png',
-		styles: 'Warngebiete_Grenzen',
+		styles: '',   //Warngebiete_Grenzen
 		transparent: true,
 		opacity: 0.6,
 		attribution: 'Geobasisdaten Gemeinden: &copy; <a href="http://www.bkg.de">BKG</a> 2015 (Daten verändert)'
@@ -168,7 +168,7 @@ if(typeof(Notification) != "undefined") Notification.requestPermission();  //
 	marker.on('move', onMapClick);  //listener for timeout
 
 
-	L.Control.Watermark = L.Control.extend({  //image for geocode
+	L.Control.Watermark = L.Control.extend({  //image for geocode (OpenStreetMap)
 		onAdd: function(map) {
 			var img = L.DomUtil.create('img');
 			img.src = 'icons/search.png';
@@ -181,7 +181,7 @@ if(typeof(Notification) != "undefined") Notification.requestPermission();  //
 		},
 		_geocode: function(ev) {
 		  var q = prompt("Ort", ""); if (q) {
-		    fetch("https://nominatim.openstreetmap.org/search?q=" + q + "&format=json")
+		    fetch("https://nominatim.openstreetmap.org/search?q=" + q + "&format=json&limit=1")
 		      .then(function(response) {
 		        response.json().then(function(data) { onGeocode({lat:data[0].lat, lng:data[0].lon}) })
 		      })
