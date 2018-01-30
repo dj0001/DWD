@@ -4,6 +4,6 @@ self.addEventListener('notificationclick', function(event) {
   event.notification.close();
 
   event.waitUntil(
-    clients.openWindow('./index_wnotify.html')
+    clients.openWindow('./index_enc.html')  //_wnotify
   );
 });
