@@ -126,7 +126,7 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
    //karte.attributionControl.setPrefix(new Date().toLocaleTimeString('de',{hour:"2-digit",minute:"2-digit"}))}}
    //karte.attributionControl.setPrefix('<a href="#" target="_fb" onclick="this.href=\'https://www.facebook.com/sharer/sharer.php?u='+location.host+location.pathname+'?ort='+Object.values(warnlayer._marker.getLatLng())+'\'">'
    // +new Date().toLocaleTimeString('de',{hour:"2-digit",minute:"2-digit"})+'</a>')}}
-   karte.attributionControl.setPrefix('<a href="#" onclick=\"navigator.share({title:"DWD", url:'+location.host+'"?ort="'+Object.values(warnlayer._marker.getLatLng())+'})\">'
+   karte.attributionControl.setPrefix('<a href="#" onclick=\'navigator.share({title:"DWD", url:"'+location.host+'?ort='+Object.values(warnlayer._marker.getLatLng())+'"})\'>'
     +new Date().toLocaleTimeString('de',{hour:"2-digit",minute:"2-digit"})+'</a>')}}
 
 //more addons
