@@ -124,7 +124,9 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
   
   function update() {if(Date.now()-t0>=3*300000) {t0=Date.now(); warnlayer.setUrl("https://maps.dwd.de/geoserver/dwd/wms/?" + Math.random());
    //karte.attributionControl.setPrefix(new Date().toLocaleTimeString('de',{hour:"2-digit",minute:"2-digit"}))}}
-   karte.attributionControl.setPrefix('<a href="#" target="_fb" onclick="this.href=\'https://www.facebook.com/sharer/sharer.php?u='+location.host+location.pathname+'?ort='+Object.values(warnlayer._marker.getLatLng())+'\'">'
+   //karte.attributionControl.setPrefix('<a href="#" target="_fb" onclick="this.href=\'https://www.facebook.com/sharer/sharer.php?u='+location.host+location.pathname+'?ort='+Object.values(warnlayer._marker.getLatLng())+'\'">'
+   // +new Date().toLocaleTimeString('de',{hour:"2-digit",minute:"2-digit"})+'</a>')}}
+   karte.attributionControl.setPrefix('<a href="#" target="_fb" onclick="navigator.share({title:\'DWD\', url:\''+location.host+location.pathname+'?ort='+Object.values(warnlayer._marker.getLatLng())+'\'})">'
     +new Date().toLocaleTimeString('de',{hour:"2-digit",minute:"2-digit"})+'</a>')}}
 
 //more addons
