@@ -1,0 +1,19 @@
+   <FeatureTypeStyle>
+     <Rule>
+       <PolygonSymbolizer>
+         <Fill>
+           <GraphicFill>
+             <Graphic>
+               <ExternalGraphic>
+                 <OnlineResource
+                   xlink:type="simple"
+                   xlink:href="icons/FROST.png" />
+                 <Format>image/png</Format>
+               </ExternalGraphic>
+             <Size>93</Size>
+             </Graphic>
+           </GraphicFill>
+         </Fill>
+       </PolygonSymbolizer>
+     </Rule>
+   </FeatureTypeStyle>
