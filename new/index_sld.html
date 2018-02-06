@@ -69,7 +69,7 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
 	var warnlayer = L.tileLayer.betterWms("https://maps.dwd.de/"+ (isNaN(qs)? "geoserver/dwd/wms/":"geoproxy_warnungen/service/"), {  //
 		layers: 'Warnungen_Gemeinden_vereinigt',
 		// eigene Styled Layer Descriptor (SLD) können zur alternativen Anzeige der Warnungen genutzt werden (https://docs.geoserver.org/stable/en/user/styling/sld/reference/)
-		sld: 'https://dj0001.github.io/DWD/style.sld',  //https://eigenerserver/alternativer.sld
+		sld: 'https://dj0001.github.io/DWD/new/style.sld',  //https://eigenerserver/alternativer.sld
 		format: 'image/png',
 		transparent: true,
 		opacity: 0.8,
