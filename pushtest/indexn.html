@@ -59,7 +59,8 @@ fetch('https://web-push-codelab.glitch.me/', {  //Server  /api/save-subscription
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(pushSubscription)
+    body: JSON.stringify(pushSubscription),
+  mode: 'no-cors'
   })
   .then(function(response) {
     if (!response.ok) {
