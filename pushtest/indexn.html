@@ -54,7 +54,7 @@ navigator.serviceWorker.register('sw.js')
     console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
     //return pushSubscription;
 
-fetch('https://web-push-codelab.glitch.me/', {  //Server  /api/save-subscription/  api/  https://fcc-weather-api.glitch.me/api/current?lat=48.37&lon=10.89
+fetch('https://web-push-codelab.glitch.me/', {  //Server  /api/save-subscription/  api/  https://fcc-weather-api.glitch.me/api/current?lat=48.37&lon=10.89  //cors
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
