@@ -10,7 +10,6 @@
 
 </head>
 <body>
-Amtliche Warnung
 <div id="anzeige"></div>
 
 <script>
@@ -36,7 +35,7 @@ content += "<p>"+item.properties.EVENT
 + "</p>"
 })
 
-document.querySelector("#anzeige").innerHTML=content||"Keine Warnungen"
+document.querySelector("#anzeige").innerHTML="<h2>Amtliche Warnung</h2>"+(content||"Keine Warnungen")
 }
 </script>
 
