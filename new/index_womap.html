@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+	<title>DWD- Warnmodul 2</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="dj0001">
+	<link rel="icon" type="image/png" sizes="192x192" href="icons/warn.png">
+
+</head>
+<body>
+Amtliche Warnung
+<div id="anzeige"></div>
+
+<script>
+var ort="48.4,10.9"  //edit here
+var qs=decodeURI(location.search.slice(1)).split(","); ort=ort.split(",")  //?48.37,10.9
+
+if(qs[0]==1) navigator.geolocation.getCurrentPosition(function(e){getFeatureInfo(e.coords.latitude,e.coords.longitude)});  //?1
+else getFeatureInfo(qs[0]||ort[0],qs[1]||ort[1])
+
+function getFeatureInfo(lat,lon) { console.log(lat+","+lon)
+var url = "https://maps.dwd.de/geoserver/dwd/wms/?request=GetFeatureInfo&service=WMS&srs=EPSG%3A4326&styles=&transparent=true&version=1.1.1&format=image%2Fpng&bbox="+lon+"%2C"+lat+"%2C"+(1*lon+0.001)+"%2C"+(1*lat+0.001)+"&height=1&width=1&layers=Warnungen_Gemeinden_vereinigt&query_layers=Warnungen_Gemeinden_vereinigt&info_format=application%2Fjson&propertyName=EVENT%2CONSET%2CEXPIRES%2CSENT%2CSEVERITY%2CEC_GROUP%2CSENT&FEATURE_COUNT=50&x=0&y=0"
+    var xhr = new XMLHttpRequest()
+    xhr.open("GET", url, true)
+    xhr.onload = function() {var data=JSON.parse(this.response); showGetFeatureInfo(data) }
+    xhr.send()
+}
+
+function showGetFeatureInfo(data) { content="";
+data.features.forEach(function(item){
+content += "<p>"+item.properties.EVENT
++"<br>"+new Date(item.properties.ONSET).toLocaleString('de',{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+" Uhr"
++"<br>"+new Date(item.properties.EXPIRES).toLocaleString('de',{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+" Uhr"
++ "</p>"
+})
+
+document.querySelector("#anzeige").innerHTML=content
+}
+</script>
+
+</body>
+</html>
