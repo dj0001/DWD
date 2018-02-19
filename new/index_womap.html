@@ -27,11 +27,11 @@ var url = "https://maps.dwd.de/geoserver/dwd/wms/?request=GetFeatureInfo&service
     xhr.send()
 }
 
-function showGetFeatureInfo(data) { content="";
+function showGetFeatureInfo(data) { var content="", opt={day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}
 data.features.forEach(function(item){
 content += "<p>"+item.properties.EVENT
-+"<br>"+new Date(item.properties.ONSET).toLocaleString('de',{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+" Uhr"
-+"<br>"+new Date(item.properties.EXPIRES).toLocaleString('de',{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+" Uhr"
++"<br>"+new Date(item.properties.ONSET).toLocaleString('de',opt)+" Uhr"
++"<br>"+new Date(item.properties.EXPIRES).toLocaleString('de',opt)+" Uhr"
 + "</p>"
 })
 
