@@ -99,4 +99,15 @@ layer.getFeatureInfoJsonp({latlng:layer._marker.getLatLng()})
 new Timer(layer); lnr++;
 }
 
+warnlayer._marker.on('move', function(e){ var data=warnlayer._data, sd=[]    //structured data
+data.features.forEach(function(item, i){
+sd[i]={"@context": "http://schema.org","@type": "Event"}
+sd[i].name=item.properties.EVENT
+sd[i].startDate=item.properties.ONSET
+sd[i].endDate=item.properties.EXPIRES
+sd[i].location={type:"Place",address:"Germany"}
+})
+document.querySelector("script[type]").innerHTML=JSON.stringify(sd)
+})
+
 })();
