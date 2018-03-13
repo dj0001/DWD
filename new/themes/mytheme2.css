@@ -1,0 +1,5 @@
+/* add after leaflet.css */
+
+tr, td {display: inline;} 
+tr:first-child {display: block; padding-bottom: 18px}
+tr:last-child td:last-child::before {content: "\2013\00A0" }

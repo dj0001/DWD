@@ -1,0 +1,7 @@
+/* add after leaflet.css */
+
+.leaflet-popup-content h2 {
+    background: yellow;
+    margin: -15px -20px 15px;
+    padding-left: 10px
+}
