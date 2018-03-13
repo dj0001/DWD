@@ -1,0 +1,8 @@
+/* add after leaflet.css */
+
+.leaflet-popup-content p {
+    display: block;
+    margin: 0.5em auto;
+    border-style: inset;
+    border-width: 1px;
+} 
