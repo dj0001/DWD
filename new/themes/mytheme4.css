@@ -1,0 +1,7 @@
+/* add after leaflet.css */
+
+.leaflet-popup-content-wrapper {
+    background: black;
+    color: white;
+}
+td:first-child {padding-right:3px}
