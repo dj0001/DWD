@@ -93,7 +93,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
         + "><tr><td>Ereignis :</td><td><b><a style='text-decoration:none' href='?" + item.properties.EC_GROUP + "'>" + item.properties.EVENT.replace("RMATION","") + "</a></b></td></tr>"  //.EVENT
         + "<tr><td></td><td"+(Date.now()-o<0?" style='color:#808080'":"")+">" + onset + "</td></tr>"  //Beginn:
         + "<tr><td></td><td>" + (item.properties.EXPIRES?end:"&nbsp;") + "</td></tr></table>"
-        + "<div style='position: absolute;top: -20px;left: 0px;font: 68px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif;color:"+color[item.properties.SEVERITY]+";font-weight: 700;'>&#x25b3;</div></div>"
+        + "<div style='position: absolute;top: -20px;left: 0px;font: 68px/1.5 Arial, Helvetica, \"Helvetica Neue\", sans-serif;color:"+color[item.properties.SEVERITY]+";font-weight: 700;'>&#x25b3;</div></div>"
         +"<p></p>";  //Ende:
         //content += "Gesendet: " + item.properties.SENT + "</p>";
     });
