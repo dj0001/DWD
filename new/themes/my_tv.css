@@ -1,0 +1,8 @@
+/* best with full configurable background */
+
+tr, td {display: inline;} 
+tr:first-child {display: block}
+tr:last-child td:last-child::before {content: "\2013\00A0" }
+.leaflet-container {font: 18px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;}
+.leaflet-popup-content-wrapper {background: #3f51b5; color: white; text-shadow: 0 0 1px black;}
+.leaflet-container a {color:white}
