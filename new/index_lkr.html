@@ -138,7 +138,7 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
 	};
 
 	// Layercontrol-Element erstellen und hinzufügen
-    L.control.layers(baseLayers, overLayers).addTo(karte);
+    L.control.layers(baseLayers, overLayers, {autoZIndex:false}).addTo(karte);
 
 	// Demo-Marker mit Popup hinzufügen
 	//var marker = L.marker([50.099444, 8.770833]).addTo(karte);
