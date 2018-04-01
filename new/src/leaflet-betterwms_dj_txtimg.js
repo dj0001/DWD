@@ -93,7 +93,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
         + "<div style='position: relative;'><table style='background: no-repeat 12px 75%/32px url(\"icons/"+item.properties.EC_GROUP.replace(/;.*/,'')+".png\"); border-spacing:0px'"  //, no-repeat left/contain url(\"icons/warn.png\"), linear-gradient(to right, "+color[item.properties.SEVERITY]+" 54px,transparent 54px)
         + "><tr><td>Ereignis :</td><td><b><a style='text-decoration:none' href='?" + item.properties.EC_GROUP + "'>" + item.properties.EVENT.replace("RMATION","") + "</a></b></td></tr>"  //.EVENT
         + "<tr><td></td><td"+(Date.now()-o<0?" style='color:#808080'":"")+">" + onset + "</td></tr>"  //Beginn:
-        + "<tr><td></td><td>" + (item.properties.EXPIRES?end:"&nbsp;") + "</td></tr></table></div>"
+        + "<tr><td></td><td"+(Date.now()-e>0?" style='color:#808080'":"")+">" + (item.properties.EXPIRES?end:"&nbsp;") + "</td></tr></table></div>"
         +"</div><p></p>";  //Ende:
         //content += "Gesendet: " + item.properties.SENT + "</p>";
     });
