@@ -35,7 +35,7 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
 	<!-- BetterWMS stellt vereinfachte getFeatureInfo-Abfragen für WMS-Layer bereit; alternativ kann z.B. https://github.com/heigeo/leaflet.wms oder eigener Code verwendet werden
 	Die Funktionen wurden angepasst, um JSONP-Anfragen durchzuführen und ausgewählte Elemente der Feature-Info im Popup darzustellen; Änderungen sind in leaflet-betterwms.js entsprechen markiert
 	-->
-	<script src="src/leaflet-betterwms_dj_txtimg.js"></script>
+	<script src="src/leaflet-betterwms_dj_lkr.js"></script>
   
 </head>
 <body>
@@ -130,7 +130,7 @@ Anregungen zur Nutzung oder beispielhafte Weiterentwicklungen nehmen wir gerne u
 
 	var overLayers = {
 			"<span title='DWD Geoserver dwd:Warnungen_Gemeinden_vereinigt'>Warnungen einblenden</span>": warnlayer.addTo(karte),  //Gemeinde vereinigt
-			"<span title='DWD Geoserver Gemeindewarngebiete'>Gemeindegrenzen</span>": gemeindelayer,  //Warngebiete (Gemeinden)  //Landkreis
+			"<span title='DWD Geoserver Gemeindewarngebiete'Landkreisgrenzen</span>": gemeindelayer,  //Warngebiete (Gemeinden)  //Landkreis
 			"<span title='Satellitenbild METEOSAT'>Satellitenbild</span>": satlayer,
 			"<span title='Warnungen_Binnenseen und Küste'>Warnungen Binnenseen</span>": seenlayer
 			, "<span title='Pollenflug Graeser'>Gräser</span>": graeserlayer  //,
