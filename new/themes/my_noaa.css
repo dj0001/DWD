@@ -1,0 +1,8 @@
+div[style*=THUNDERSTORM]:before {background: no-repeat left/contain url(https://www.weather.gov/images/nws/newicons/tsra.png);content: "";position: absolute;width: 52px;height: 52px;}
+div[style*=WIND]:before {background: no-repeat left/contain url(https://www.weather.gov/images/nws/newicons/wind_skc.png);content: "";position: absolute;width: 52px;height: 52px;}
+div[style*=FOG]:before {background: no-repeat left/contain url(https://www.weather.gov/images/nws/newicons/fg.png);content: "";position: absolute;width: 52px;height: 52px;}
+div[style*=FROST]:before {background: no-repeat left/contain url(https://www.weather.gov/images/nws/newicons/cold.png);content: "";position: absolute;width: 52px;height: 52px;}
+div[style*=GLAZE]:before {background: no-repeat left/contain url(https://www.weather.gov/images/nws/newicons/ra_fzra.png);content: "";position: absolute;width: 52px;height: 52px;}
+div[style*=HEAT]:before {background: no-repeat left/contain url(https://www.weather.gov/images/nws/newicons/hot.png);content: "";position: absolute;width: 52px;height: 52px;}
+div[style*=RAIN]:before {background: no-repeat left/contain url(https://www.weather.gov/images/nws/newicons/shra.png);content: "";position: absolute;width: 52px;height: 52px;}
+div[style*=SNOW]:before {background: no-repeat left/contain url(https://www.weather.gov/images/nws/newicons/sn.png);content: "";position: absolute;width: 52px;height: 52px;}
