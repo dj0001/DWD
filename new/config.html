@@ -1,34 +1,44 @@
+<!DOCTYPE html>
+
+<head>
+<base href="https://dj0001.github.io/DWD-Warnmodul-2/">
+<style>
+img {width: 24px}
+img:focus {border: 1px solid blue}
+:root {--main-bg-color:linear-gradient(to right, yellow,orange,red,darkred)}
+input[type=range]::-webkit-slider-runnable-track {background:var(--main-bg-color)}
+input[type=range]::-moz-range-track {background:var(--main-bg-color)}
+</style>
+</head>
 Select one option<br><br>
 
 group
-<select onchange='para(this.value);document.getElementById("ort").value="";document.getElementById("level").value="1"' id="group">
-  <option value="">alle</option>
-  <option>Gewitter</option>
-  <option>Sturm</option>
-  <option>Regen</option>
-  <option>Schnee</option>
-  <option>Frost</option>
-  <option>Glatteis</option>
-  <option>Tauwetter</option>
-  <option>Nebel</option>
-  <option>Hitze</option>
-  <option>UV</option>
-</select>
+<span id="group">
+<img src="https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/viewer/img/warnicons/warn_icons_alle.png" alt="alle" width=24 title="" tabindex="0">
+<img src="icons/THUNDERSTORM.png" title="Gewitter" tabindex="0">
+<img src="icons/WIND.png" title="Sturm" tabindex="0">
+<img src="icons/RAIN.png" title="Regen" tabindex="0">
+<img src="icons/SNOWFALL.png" title="Schnee" tabindex="0">
+<img src="icons/FROST.png" title="Frost" tabindex="0">
+<img src="icons/GLAZE.png" title="Glatteis" tabindex="0">
+<img src="icons/THAW.png" title="Tauwetter" tabindex="0">
+<img src="icons/FOG.png" title="Nebel" tabindex="0">
+<img src="icons/HEAT.png" title="Hitze" tabindex="0">
+<img src="icons/UV.png" title="UV" tabindex="0">
+</span>
 
 <br>
 ort
-<input type="text" list="cityname" onchange='para((isNaN(this.value)?"ort=":"")+this.value);document.getElementById("group").value="";document.getElementById("level").value="1"' id="ort">  <!-- oninput -->
+<input type="text" list="cityname" title="default: locate" onchange='para((isNaN(this.value)?"ort=":"")+this.value);document.getElementById("level").value="1"' id="ort">  <!-- oninput -->
 <datalist id="cityname">
-  <option value="">
-  <option value="0">
-  <option value="1">
+  <option value="">locate</option>
+  <option value="0">none</option>
+  <option value="1">watch</option>
 </datalist>
-("" locate, 1 watch, 0 none)
 
 <br>
 <label for="level">warnlevel &#x2265; </label>
-<input type="range" min="1" max="5" step="1" value="1" id="level" onchange='this.title=this.value; para(this.value.replace("1",""));document.getElementById("ort").value="";document.getElementById("group").value=""' list="tickmarks"
- style='background:linear-gradient(to right, yellow,orange,red,darkred)'>
+<input type="range" min="1" max="5" step="1" value="1" id="level" onchange='this.title=this.value; para(this.value.replace("1",""));document.getElementById("ort").value=""' list="tickmarks">
 <datalist id="tickmarks">
   <option value="1">
   <option value="2">
@@ -42,7 +52,6 @@ ort
 
 
 <script>
-function para(query) {
-document.querySelector("a").href="https://dj0001.github.io/DWD-Warnmodul-2/?"+query  //index.html
-}
+function para(query) {document.querySelector("a").href="?"+query}  //index.html
+document.getElementById("group").onclick=function(e) {para(e.target.title);document.getElementById("ort").value="";document.getElementById("level").value="1"}
 </script>
