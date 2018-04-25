@@ -6,11 +6,12 @@
 img {width: 24px}
 img:focus {border: 1px solid blue}
 input[type=range]::-webkit-slider-runnable-track {background:linear-gradient(to right, yellow,yellow 25%,orange 25%,orange 50%,red 50%,red 75%,darkred 75%)}
+label {display: inline-block; width: 76px}
 </style>
 </head>
 Select one option<br><br>
 
-group
+<label for="group">group </label>
 <span id="group">
 <img src="https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/viewer/img/warnicons/warn_icons_alle.png" alt="alle" width=24 title="" tabindex="0">
 <img src="icons/THUNDERSTORM.png" title="Gewitter" tabindex="0">
@@ -26,7 +27,7 @@ group
 </span>
 
 <br>
-ort
+<label for="ort">ort </label>
 <input type="text" list="cityname" title="default: locate" onchange='para((isNaN(this.value)?"ort=":"")+this.value);document.getElementById("level").value="1"' id="ort">  <!-- oninput -->
 <datalist id="cityname">
   <option value="">locate</option>
@@ -35,7 +36,7 @@ ort
 </datalist>
 
 <br>
-<label for="level">warnlevel &#x2265; </label>
+<label for="level">warnlevel &#x2265;</label>
 <input type="range" min="1" max="5" step="1" value="1" id="level" title="1" onchange='this.title=this.value; para(this.value.replace("1",""));document.getElementById("ort").value=""' list="tickmarks">
 <datalist id="tickmarks">
   <option value="1">
