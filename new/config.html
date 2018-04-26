@@ -4,8 +4,8 @@
 <base href="https://dj0001.github.io/DWD-Warnmodul-2/">
 <style>
 body {font-family:Helvetica }
-img {width: 24px}
-img:focus {border: 1px solid blue}
+input[type=image] {width: 24px}
+input[type=image]:focus {border: 1px solid blue} /* IE */
 input[type=range]::-webkit-slider-runnable-track {background:linear-gradient(to right, yellow,yellow 25%,orange 25%,orange 50%,red 50%,red 75%,darkred 75%)}
 label {display: inline-block; width: 76px}
 </style>
@@ -14,17 +14,17 @@ Select one option<br><br>
 
 <label for="group">gruppe</label>
 <span id="group">
-<img src="https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/viewer/img/warnicons/warn_icons_alle.png" alt="alle" width=24 title="" tabindex="0">
-<img src="icons/THUNDERSTORM.png" title="Gewitter" tabindex="0">
-<img src="icons/WIND.png" title="Sturm" tabindex="0">
-<img src="icons/RAIN.png" title="Regen" tabindex="0">
-<img src="icons/SNOWFALL.png" title="Schnee" tabindex="0">
-<img src="icons/FROST.png" title="Frost" tabindex="0">
-<img src="icons/GLAZE.png" title="Glatteis" tabindex="0">
-<img src="icons/THAW.png" title="Tauwetter" tabindex="0">
-<img src="icons/FOG.png" title="Nebel" tabindex="0">
-<img src="icons/HEAT.png" title="Hitze" tabindex="0">
-<img src="icons/UV.png" title="UV" tabindex="0">
+<input type="image" src="https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/viewer/img/warnicons/warn_icons_alle.png" alt="alle" title="">
+<input type="image"  src="icons/THUNDERSTORM.png" title="Gewitter">
+<input type="image"  src="icons/WIND.png" title="Sturm">
+<input type="image"  src="icons/RAIN.png" title="Regen">
+<input type="image"  src="icons/SNOWFALL.png" title="Schnee">
+<input type="image"  src="icons/FROST.png" title="Frost">
+<input type="image"  src="icons/GLAZE.png" title="Glatteis">
+<input type="image"  src="icons/THAW.png" title="Tauwetter">
+<input type="image"  src="icons/FOG.png" title="Nebel">
+<input type="image"  src="icons/HEAT.png" title="Hitze">
+<input type="image"  src="icons/UV.png" title="UV">
 </span>
 
 <br>
@@ -53,5 +53,7 @@ Select one option<br><br>
 
 <script>
 function para(query) {document.querySelector("a").href="?"+query}  //index.html
-document.getElementById("group").onclick=function(e) {para(e.target.title);document.getElementById("ort").value="";document.getElementById("level").value="1"}
+var tmp=document.querySelectorAll('input[type=image]'); for (var i=0; i<tmp.length; i++) {
+ tmp[i].onclick = function(e) {para(e.target.title);document.getElementById("ort").value="";document.getElementById("level").value="1"}
+ }
 </script>
