@@ -3,6 +3,7 @@
 
 <head>
 <title>configurator for DWD- Warnmodul 2</title>
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="https://dj0001.github.io/DWD-Warnmodul-2/">
 <style>
@@ -50,16 +51,16 @@ Select one option<br><br>
 </datalist>
 <br><br>
 
-Landkreise <div class="onoffswitch"><input id="myonoffswitch" type="checkbox" onchange='opt.lkr=this.checked?1:"";para()'><label class="onoffswitch-label" for="myonoffswitch"></label></div>
+<form action="index.html" target="wm" onsubmit='document.querySelector("input[type=hidden]").value=qst'>
+<input type="hidden" name="qs">
+  Landkreise 
+  <div class="onoffswitch"><input type="checkbox" name="lkr" id="myonoffswitch"><label class="onoffswitch-label" for="myonoffswitch"></label></div>
 <br>
 <br>
-
-<a href="index.html" target="wm" title="with parameter">Warnmodul</a>
-
 
 <script>
-var qs="",opt={}
-function para(query) {if(typeof query!='undefined') qs=query; document.querySelector("a").href="?"+qs+("&"+Object.keys(opt).map(function(key) {return key+'='+opt[key]}).join('&'))}
+var qst=""
+function para(query) {qst=query; document.querySelector("input[type=submit]").title=qst}
 var tmp=document.querySelectorAll('input[type=image]'); for (var i=0; i<tmp.length; i++) {
  tmp[i].onclick = function(e) {para(e.target.title);document.getElementById("ort").value="";document.getElementById("level").value="1"}
  }
