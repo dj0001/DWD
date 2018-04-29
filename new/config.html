@@ -51,7 +51,7 @@ Select one option<br><br>
 </datalist>
 <br><br>
 
-<form action="index.html" target="wm" onsubmit='document.querySelector("input[type=hidden]").value=qst'>
+<form action="index.html" target="wm">
 <input type="hidden" name="qs">
   Landkreise 
   <div class="onoffswitch"><input type="checkbox" name="lkr" id="myonoffswitch"><label class="onoffswitch-label" for="myonoffswitch"></label></div>
@@ -60,8 +60,7 @@ Select one option<br><br>
 </form>
 
 <script>
-var qst=""
-function para(query) {qst=query; document.querySelector("input[type=submit]").title=qst}
+function para(query) {document.querySelector("input[type=hidden]").value=query; document.querySelector("input[type=submit]").title=query}
 var tmp=document.querySelectorAll('input[type=image]'); for (var i=0; i<tmp.length; i++) {
  tmp[i].onclick = function(e) {para(e.target.title);document.getElementById("ort").value="";document.getElementById("level").value="1"}
  }
