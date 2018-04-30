@@ -15,7 +15,7 @@ input[type=range]::-webkit-slider-runnable-track {background:linear-gradient(to 
 </style>
 </head>
 
-Wähle eine Option<br><br>
+eine Option wählen<br><br>
 
 <span id="group">
 <input type="image" src="https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/viewer/img/warnicons/warn_icons_alle.png" alt="alle" title="">
@@ -56,12 +56,12 @@ Wähle eine Option<br><br>
   Landkreise 
   <div class="onoffswitch"><input type="checkbox" name="lkr" id="myonoffswitch"><label class="onoffswitch-label" for="myonoffswitch"></label></div>
   <br><br>
-<input type="submit" value="Fertig">
+<input type="submit" value="Warnmodul">
 </form>
 
 <script>
 function para(query) {document.querySelector("input[type=hidden]").value=query; document.querySelector("input[type=submit]").title=query}
 var tmp=document.querySelectorAll('input[type=image]'); for (var i=0; i<tmp.length; i++) {
- tmp[i].onclick = function(e) {para(e.target.title);document.getElementById("ort").value="";document.getElementById("level").value="1"}
+ tmp[i].onclick = function(e) {para(e.target.title);document.getElementById("ort").value="";document.getElementById("level").value="1";document.getElementById("myonoffswitch").checked = false}
  }
 </script>
