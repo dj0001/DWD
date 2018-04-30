@@ -10,7 +10,8 @@
 body {font-family:Helvetica }
 input[type=image] {width: 24px}
 input[type=image]:focus {border: 1px solid blue} /* IE */
-input[type=range]::-webkit-slider-runnable-track {background:linear-gradient(to right, yellow,yellow 25%,orange 25%,orange 50%,red 50%,red 75%,darkred 75%)}
+:root {--warncolor:linear-gradient(to right, yellow,yellow 25%,orange 25%,orange 50%,red 50%,red 75%,darkred 75%)}
+input[type=range]::-webkit-slider-runnable-track {background:var(--warncolor)} input[type=range]::-moz-range-track {background:var(--warncolor)}
 .onoffswitch {display: inline-block; position: relative; width: 28px; -moz-user-select:none;} #myonoffswitch {display: none;} .onoffswitch-label {display: block; overflow: hidden; cursor: pointer; height: 8px; padding: 0; line-height: 8px; border: 0px solid #FFFFFF; border-radius: 16px; background-color: #9E9E9E;} .onoffswitch-label:before {content: ""; display: block; width: 16px; margin: -4px; background: #FFFFFF; position: absolute; top: 0; bottom: 0; right: 16px; border-radius: 16px; box-shadow: 0 6px 12px 0px #757575;} #myonoffswitch:checked + .onoffswitch-label {background-color: #CCCCCC; margin-left: 0;} #myonoffswitch:checked + .onoffswitch-label, #myonoffswitch:checked + .onoffswitch-label:before {border-color: #CCCCCC;} #myonoffswitch:checked + .onoffswitch-label:before {right: 0px; background-color: #9E9E9E; box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);} 
 </style>
 </head>
