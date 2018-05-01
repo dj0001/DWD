@@ -14,10 +14,11 @@ input[type=image]:focus {border: 1px solid blue} /* IE */
 input[type=range]::-webkit-slider-runnable-track {background:var(--warncolor)} input[type=range]::-moz-range-track {background:var(--warncolor)}
 .onoffswitch {display: inline-block; position: relative; width: 28px; -moz-user-select:none;} #myonoffswitch {display: none;} .onoffswitch-label {display: block; overflow: hidden; cursor: pointer; height: 8px; padding: 0; line-height: 8px; border: 0px solid #FFFFFF; border-radius: 16px; background-color: #9E9E9E;} .onoffswitch-label:before {content: ""; display: block; width: 16px; margin: -4px; background: #FFFFFF; position: absolute; top: 0; bottom: 0; right: 16px; border-radius: 16px; box-shadow: 0 6px 12px 0px #757575;} #myonoffswitch:checked + .onoffswitch-label {background-color: #CCCCCC; margin-left: 0;} #myonoffswitch:checked + .onoffswitch-label, #myonoffswitch:checked + .onoffswitch-label:before {border-color: #CCCCCC;} #myonoffswitch:checked + .onoffswitch-label:before {right: 0px; background-color: #9E9E9E; box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);} 
 span[onclick] {cursor:pointer}
+header {background: #f1f1f1; margin: -8px -8px 0px; padding: 8px 10px}
 </style>
 </head>
 
-eine Option wählen<hr><br>
+<header>eine Option wählen</header><br>
 
 <span id="group">
 <input type="image" src="https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/viewer/img/warnicons/warn_icons_alle.png" alt="alle" title="">
