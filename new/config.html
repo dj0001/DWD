@@ -64,6 +64,7 @@ header {background: #f1f1f1; margin: -8px -8px 0px; padding: 8px 10px}
 </form>
 
 <script>
+if(window.self!=window.top) document.querySelector("form").target="_top"  //embeded as iframe in index.html
 function para(query) {document.querySelector("input[type=hidden]").value=query; document.querySelector("input[type=submit]").title=query}
 var tmp=document.querySelectorAll('input[type=image]'); for (var i=0; i<tmp.length; i++) {
  tmp[i].onclick = function(e) {para(e.target.title);document.getElementById("ort").value="";document.getElementById("level").value="1";document.getElementById("myonoffswitch").checked = false}
