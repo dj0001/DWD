@@ -18,7 +18,8 @@ header {background: #f1f1f1; margin: -8px -8px 0px; padding: 8px 10px}
 </style>
 </head>
 
-<header>eine Option wählen</header><br>
+<main>  <!-- details -->
+<header>eine Option wählen</header><br>  <!-- summary -->
 
 <span id="group">
 <input type="image" src="https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/viewer/img/warnicons/warn_icons_alle.png" alt="alle" title="">
@@ -62,9 +63,11 @@ header {background: #f1f1f1; margin: -8px -8px 0px; padding: 8px 10px}
   <br><br>
 <input type="submit" value="Warnmodul">
 </form>
+</main>
 
 <script>
 if(window.self!=window.top) document.querySelector("form").target="_top"  //embeded as iframe in index.html
+if(location.search) {var tmp = document.createElement("iframe");tmp.setAttribute("frameborder","0");tmp.setAttribute("name","wm");tmp.setAttribute("scrolling","no");tmp.width=600;tmp.height=300;document.body.appendChild(tmp)}  //?1
 function para(query) {document.querySelector("input[type=hidden]").value=query; document.querySelector("input[type=submit]").title=query}
 var tmp=document.querySelectorAll('input[type=image]'); for (var i=0; i<tmp.length; i++) {
  tmp[i].onclick = function(e) {para(e.target.title);document.getElementById("ort").value="";document.getElementById("level").value="1";document.getElementById("myonoffswitch").checked = false}
