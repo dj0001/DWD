@@ -1,5 +1,5 @@
 //add script at the end
-//lamps goes on on warnings
+//lights go on for warnings
 //tested with emulator, because i don't have a bridge
 
 warnlayer._marker.on('move', function(e){ var data=warnlayer._data
