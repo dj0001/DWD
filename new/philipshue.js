@@ -2,7 +2,7 @@
 //lights go on for warnings
 //tested with emulator, because i don't have a bridge
 
-var path=opt.light  //?&light=1
+var path=opt.light  //URL parameter ?&light=1
 path=path? "lights/"+path+"/state" :"groups/0/action"
 
 var dt=0; warnlayer._marker.on('move', function(e){ var data=warnlayer._data
