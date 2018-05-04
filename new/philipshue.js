@@ -15,8 +15,8 @@ max=Math.max(max,severity.indexOf(item.SEVERITY))
 var color=[{"hue":10920,"bri":127,"sat":255,on:true},{"hue":5481,"bri":127,"sat":255,on:true},{"hue":0,"bri":127,"sat":255,on:true},{"hue":0,"bri":127,"sat":255,on:true}]
 var bd=color[max]  //{on:true}
 
-if(!isNaN(qs) && max >= qs-1+dt) {showLights(bd); dt++} else dt=0  //warnlev
-}
+if(!isNaN(qs) && max >= qs-1+dt) {showLights(bd); dt++}  //warnlev
+} else dt=0
 })
 
 function showLights(bd) {
