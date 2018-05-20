@@ -35,6 +35,7 @@ content += "<p>"+item.properties.EVENT
 })
 
 document.querySelector("#anzeige").innerHTML="<h2>Amtliche Warnung</h2>"+(content||"Keine Warnungen")+" <a href='https://www.dwd.de/warnungen'>dwd.de</a>"
+//fetch('http://localhost:8000/api/newdeveloper/groups/0/action',{method:"PUT",body:content?'{"hue":10920}':'{"hue":21840}',headers:{'Content-Type':'application/json'}})  //philipshue
 }
 </script>
 
