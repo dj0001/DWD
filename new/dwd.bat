@@ -1,4 +1,4 @@
-Rem DWD-Warnmodul (win10 1803)
+Rem DWD-Warnmodul (win10 1803) time in UTC
 @echo off
 set /p lat="Enter lat(48.37) " ||set lat=48.37
 set /p lon="Enter lon(10.90) " ||set lon=10.90
