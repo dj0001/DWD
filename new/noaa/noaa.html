@@ -1,0 +1,37 @@
+<script>
+//parameter bridge ?https://localhost:443/api/newdeveloper
+
+ function update() {
+fetch("https://api.weather.gov/alerts/active/area/"+area).then(function(response){
+response.json().then(function(data){
+if(data.features.length) {
+var severity=["Minor","Moderate","Severe","Extreme"], max=0  //get the highest warnlevel
+data.features.forEach(function(item){ item=item.properties
+max=Math.max(max,severity.indexOf(item.severity))
+ })
+document.body.innerHTML=severity[max]
+var color=[60,30,0,330]
+showLights({hue:182*color[max]})
+} else {document.body.innerHTML="no warnings"; showLights({hue:21840})}
+})
+})
+ }
+
+function showLights(bd) {
+var xhr = new XMLHttpRequest();
+xhr.open("PUT", bridge+"/"+path)
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.onload = function() {console.log(xhr.responseText)}
+xhr.onerror = function(e) {console.log("error")}
+xhr.send(JSON.stringify(bd))
+}
+
+var bridge="localhost:8000/api/newdeveloper"  //edit here
+bridge=location.search.slice(1)||prompt("change bridge adress",bridge)||bridge
+bridge=((bridge.match(/https?:/))?'':'http://')+bridge
+var area=prompt("enter area","IA")||"IA"  //NY
+var tmp=prompt("select light","1")||1  // /0 group
+var path=isNaN(tmp)? "groups"+tmp+"/action" :"lights/"+tmp+"/state"
+
+update(); setInterval(function(){ update() }, 300000);
+</script>
