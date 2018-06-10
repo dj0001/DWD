@@ -2,17 +2,17 @@
 //parameter bridge ?https://localhost:443/api/newdeveloper
 
  function update() {
-fetch("https://api.weather.gov/alerts/active/area/"+area).then(function(response){
+fetch("https://api.weather.gov/alerts/active/"+para).then(function(response){
 response.json().then(function(data){
 if(data.features.length) {
 var severity=["Minor","Moderate","Severe","Extreme"], max=0  //get the highest warnlevel
 data.features.forEach(function(item){ item=item.properties
 max=Math.max(max,severity.indexOf(item.severity))
  })
-document.body.innerHTML=severity[max]
+document.body.innerHTML=data.title+"<br>"+severity[max]
 var color=[60,30,0,330]
 showLights({hue:182*color[max]})
-} else {document.body.innerHTML="no warnings"; showLights({hue:21840})}
+} else {document.body.innerHTML=data.title+"<br>no warnings"; showLights({hue:21840})}
 })
 })
  }
@@ -29,7 +29,8 @@ xhr.send(JSON.stringify(bd))
 var bridge="localhost:8000/api/newdeveloper"  //edit here
 bridge=location.search.slice(1)||prompt("change bridge adress",bridge)||bridge
 bridge=((bridge.match(/https?:/))?'':'http://')+bridge
-var area=prompt("enter area","IA")||"IA"  //NY
+var tmp=prompt("enter area","IA")||"IA"  //IAZ027
+var para=tmp.length-2? "zone/"+tmp :"area/"+tmp
 var tmp=prompt("select light","1")||1  // /0 group
 var path=isNaN(tmp)? "groups"+tmp+"/action" :"lights/"+tmp+"/state"
 
