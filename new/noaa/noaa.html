@@ -1,23 +1,26 @@
+<body>
+<div id="content"></div>
 <script>
-//parameter bridge ?https://localhost:443/api/newdeveloper
+//parameter zone ?IAZ027 (disable hue)
 
- function update() {
+function update() {
 fetch("https://api.weather.gov/alerts/active/"+para).then(function(response){
 response.json().then(function(data){
+document.getElementById("content").innerHTML="<a href='https://alerts.weather.gov/cap/"+(area.length-2?"wwaatmget.php?x="+area+"&y=1":area+".php?x=1")+"'>"+data.title+"</a>"
 if(data.features.length) {
 var severity=["Minor","Moderate","Severe","Extreme"], max=0  //get the highest warnlevel
 data.features.forEach(function(item){ item=item.properties
 max=Math.max(max,severity.indexOf(item.severity))
  })
-document.body.innerHTML=data.title+"<br>"+severity[max]
+document.getElementById("content").innerHTML+="<br>"+severity[max]
 var color=[60,30,0,330]
 showLights({hue:182*color[max]})
-} else {document.body.innerHTML=data.title+"<br>no warnings"; showLights({hue:21840})}
+} else {document.getElementById("content").innerHTML+="<br>no warnings"; showLights({hue:21840})}
 })
 })
  }
 
-function showLights(bd) {
+function showLights(bd) { if(location.search) return 0
 var xhr = new XMLHttpRequest();
 xhr.open("PUT", bridge+"/"+path)
 xhr.setRequestHeader('Content-Type', 'application/json');
@@ -26,13 +29,16 @@ xhr.onerror = function(e) {console.log("error")}
 xhr.send(JSON.stringify(bd))
 }
 
-var bridge="localhost:8000/api/newdeveloper"  //edit here
-bridge=location.search.slice(1)||prompt("change bridge adress",bridge)||bridge
+var area=location.search.slice(1)||prompt("enter area","IA")||"IA"  //IAZ027
+var para=area.length-2? "zone/"+area :"area/"+area
+if(!location.search) {
+var bridge="localhost:8000/api/newdeveloper"  //edit here https://localhost:443/api/newdeveloper
+bridge=prompt("change bridge adress",bridge)||bridge
 bridge=((bridge.match(/https?:/))?'':'http://')+bridge
-var tmp=prompt("enter area","IA")||"IA"  //IAZ027
-var para=tmp.length-2? "zone/"+tmp :"area/"+tmp
 var tmp=prompt("select light","1")||1  // /0 group
 var path=isNaN(tmp)? "groups"+tmp+"/action" :"lights/"+tmp+"/state"
+ }
 
 update(); setInterval(function(){ update() }, 300000);
 </script>
+</body>
