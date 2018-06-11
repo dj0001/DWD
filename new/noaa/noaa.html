@@ -29,8 +29,9 @@ xhr.onerror = function(e) {console.log("error")}
 xhr.send(JSON.stringify(bd))
 }
 
-var area=location.search.slice(1)||prompt("enter area","IA")||"IA"  //IAZ027
+var area=location.search.slice(1)||prompt("enter area (0 = \u2316)","IA")||"IA"  //IAZ027
 var para=area.length-2? "zone/"+area :"area/"+area
+if(area==0) { navigator.geolocation.getCurrentPosition(function(pos){para="?point="+pos.coords.latitude+","+pos.coords.longitude;update()}) }
 if(!location.search) {
 var bridge="localhost:8000/api/newdeveloper"  //edit here https://localhost:443/api/newdeveloper
 bridge=prompt("change bridge adress",bridge)||bridge
@@ -39,6 +40,6 @@ var tmp=prompt("select light","1")||1  // /0 group
 var path=isNaN(tmp)? "groups"+tmp+"/action" :"lights/"+tmp+"/state"
  }
 
-update(); setInterval(function(){ update() }, 300000);
+if(area!=0) update(); setInterval(function(){ update() }, 300000);
 </script>
 </body>
