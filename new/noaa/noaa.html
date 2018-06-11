@@ -39,6 +39,8 @@ if(!location.search) {
 var bridge="localhost:8000/api/newdeveloper"  //edit here https://localhost:443/api/newdeveloper
 bridge=prompt("change bridge adress",bridge)||bridge
 bridge=((bridge.match(/https?:/))?'':'http://')+bridge
+if (bridge.match("///"))  //search on portal /api/olddeveloper
+fetch("https://www.meethue.com/api/nupnp").then(function(response){response.json().then(function(data){if(data[0]) bridge=bridge.replace("//","//"+data[0].internalipaddress)})})
 var tmp=prompt("select light","1")||1  // /0 group, s/3 sensor
 var path=isNaN(tmp)? "groups"+tmp+"/action" :"lights/"+tmp+"/state"
 if(tmp.match("s/")) path="sensor"+tmp+"/state"
