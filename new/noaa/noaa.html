@@ -7,15 +7,18 @@ function update() {
 fetch("https://api.weather.gov/alerts/active/"+para).then(function(response){
 response.json().then(function(data){
 document.getElementById("content").innerHTML="<a href='https://alerts.weather.gov/cap/"+(area.length-2?"wwaatmget.php?x="+area+"&y=1":area+".php?x=1")+"'>"+data.title+"</a>"
+
+var severity=["no warnings","Minor","Moderate","Severe","Extreme"], max=0, color=[120,60,30,0,330]  //get the highest warnlevel
 if(data.features.length) {
-var severity=["Minor","Moderate","Severe","Extreme"], max=0  //get the highest warnlevel
 data.features.forEach(function(item){ item=item.properties
 max=Math.max(max,severity.indexOf(item.severity))
  })
-document.getElementById("content").innerHTML+="<br>"+severity[max] +"<br>"+data.features[0].properties.sent
-var color=[60,30,0,330]
-showLights({hue:182*color[max]})
-} else {document.getElementById("content").innerHTML+="<br>no warnings"; showLights({hue:21840})}
+document.getElementById("content").innerHTML+="<br>"+data.features[0].properties.sent
+}
+var wl=1  //Minor warnlevel edit here
+if(max<wl) max=0
+document.getElementById("content").innerHTML+="<br>"+severity[max]
+showLights(path.match("sensors/")?{status:max}:{hue:182*color[max]})
 })
 })
  }
@@ -36,8 +39,9 @@ if(!location.search) {
 var bridge="localhost:8000/api/newdeveloper"  //edit here https://localhost:443/api/newdeveloper
 bridge=prompt("change bridge adress",bridge)||bridge
 bridge=((bridge.match(/https?:/))?'':'http://')+bridge
-var tmp=prompt("select light","1")||1  // /0 group
+var tmp=prompt("select light","1")||1  // /0 group, s/3 sensor
 var path=isNaN(tmp)? "groups"+tmp+"/action" :"lights/"+tmp+"/state"
+if(tmp.match("s/")) path="sensor"+tmp+"/state"
  }
 
 if(area!=0) update(); setInterval(function(){ update() }, 300000);
