@@ -12,7 +12,7 @@ var severity=["Minor","Moderate","Severe","Extreme"], max=0  //get the highest w
 data.features.forEach(function(item){ item=item.properties
 max=Math.max(max,severity.indexOf(item.severity))
  })
-document.getElementById("content").innerHTML+="<br>"+severity[max]
+document.getElementById("content").innerHTML+="<br>"+severity[max] +"<br>"+data.features[0].properties.sent
 var color=[60,30,0,330]
 showLights({hue:182*color[max]})
 } else {document.getElementById("content").innerHTML+="<br>no warnings"; showLights({hue:21840})}
