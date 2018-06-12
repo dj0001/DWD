@@ -13,12 +13,12 @@ if(data.features.length) {
 data.features.forEach(function(item){ item=item.properties
 max=Math.max(max,severity.indexOf(item.severity))
  })
-document.getElementById("content").innerHTML+="<br>"+data.features[0].properties.sent
+document.getElementById("content").innerHTML+="<br><small>"+data.features[0].properties.sent+"</small>"
 }
 var wl=1  //Minor warnlevel edit here
 if(max<wl) max=0
 document.getElementById("content").innerHTML+="<br>"+severity[max]
-showLights(path.match("sensors/")?{status:max}:{hue:182*color[max]})
+showLights(path.match("sensors/")?{status:max}:{hue:182*color[max]})  // ,on:true
 })
 })
  }
@@ -41,7 +41,7 @@ bridge=prompt("change bridge adress",bridge)||bridge
 bridge=((bridge.match(/https?:/))?'':'http://')+bridge
 if (bridge.match("///"))  //search on portal /api/olddeveloper
 fetch("https://www.meethue.com/api/nupnp").then(function(response){response.json().then(function(data){if(data[0]) bridge=bridge.replace("//","//"+data[0].internalipaddress)})})
-var tmp=prompt("select light","1")||1  // /0 group, s/3 sensor
+var tmp=prompt("select light","1")||"1"  // /0 group, s/3 sensor
 var path=isNaN(tmp)? "groups"+tmp+"/action" :"lights/"+tmp+"/state"
 if(tmp.match("s/")) path="sensor"+tmp+"/state"
  }
