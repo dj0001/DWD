@@ -13,17 +13,17 @@ if(data.features.length) {
 data.features.forEach(function(item){ item=item.properties
 max=Math.max(max,severity.indexOf(item.severity))
  })
-document.getElementById("content").innerHTML+="<br><small>"+data.features[0].properties.sent+"</small>"
+document.getElementById("content").innerHTML+="<br><small>"+data.features[0].properties.sent+"</small>"  //
 }
 var wl=1  //Minor warnlevel edit here
 if(max<wl) max=0
 document.getElementById("content").innerHTML+="<br>"+severity[max]
-showLights(path.match("sensors/")?{status:max}:{hue:182*color[max]})  // ,on:true
+if(!location.search) showLights(path.match("sensors/")?{status:max}:{hue:182*color[max]})  // ,on:true
 })
 })
  }
 
-function showLights(bd) { if(location.search) return 0
+function showLights(bd) {
 var xhr = new XMLHttpRequest();
 xhr.open("PUT", bridge+"/"+path)
 xhr.setRequestHeader('Content-Type', 'application/json');
@@ -32,9 +32,10 @@ xhr.onerror = function(e) {console.log("error")}
 xhr.send(JSON.stringify(bd))
 }
 
-var area=location.search.slice(1)||prompt("enter area (0 = \u2316)","IA")||"IA"  //IAZ027
+var area=location.search.slice(1)||prompt("enter area (0 = \u2316)","IA")||"IA"  //IAZ027 38.9,-77.0
 var para=area.length-2? "zone/"+area :"area/"+area
 if(area==0) { navigator.geolocation.getCurrentPosition(function(pos){para="?point="+pos.coords.latitude+","+pos.coords.longitude;update()}) }
+if(area.match(",")) para="?point="+area
 if(!location.search) {
 var bridge="localhost:8000/api/newdeveloper"  //edit here https://localhost:443/api/newdeveloper
 bridge=prompt("change bridge adress",bridge)||bridge
