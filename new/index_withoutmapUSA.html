@@ -30,7 +30,7 @@ var url = lon<0? "https://api.weather.gov/alerts/active?point="+lat+","+lon :  /
 }
 
 function showGetFeatureInfo(data) { var content="", opt={day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}
-var severity=["no warnings","Minor","Moderate","Severe","Extreme"], max=0
+var severity=["no warnings","Minor","Moderate","Severe","Extreme"], max=0, color=[120,60,30,0,330]
 if(data.features) data.features.forEach(function(item){ item=item.properties
 max=Math.max(max,severity.indexOf(item.severity||item.SEVERITY))
 content += "<p>"+(item.EVENT||item.event)
@@ -41,9 +41,9 @@ content += "<p>"+(item.EVENT||item.event)
 
 var small=true; small=location.search && small  //edit here false
 var wl=1; if(max<wl) max=0  //Minor warnlevel edit here
-if(small) content=severity[max]  //small view
+if(small) content="<span style='color:hsl("+color[max]+",100%,50%)'>&#x25b3; </span>"+ severity[max]  //small view
 document.querySelector("#anzeige").innerHTML=(small?'':"<h2>Official warning</h2>")+(content||"no warnings")+" <a href='https://www.dwd.de/warnungen'>dwd.de</a>" +" <a href='https://www.weather.gov'>NWS</a>"
-//fetch('http://localhost:8000/api/newdeveloper/sensors/3/state',{method:"PUT",body:'{"status":'+max+'}',headers:{'Content-Type':'application/json'}})  //philipshue
+//fetch('http://localhost:8000/api/newdeveloper/groups/0/action',{method:"PUT",body:'{"hue":'+182*color[max]+'}',headers:{'Content-Type':'application/json'}})  //philipshue
 }
 </script>
 
