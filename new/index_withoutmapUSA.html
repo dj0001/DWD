@@ -14,7 +14,8 @@
 
 <script>
 var bridge=""  //edit here philipshue "http://localhost:8000/api/newdeveloper"
-if(bridge && !location.search) light=prompt("select light","1")||"1"  // "/3" sensor
+if(bridge && !location.search) {  //bridge=prompt("change bridge",bridge)||bridge
+ light=prompt("select light","1")||"1"}  // "/3" sensor
 
 var area=location.search.slice(1)||prompt("enter coordinates (0 = \u2316)","48.4,10.9")||0  //URL parameter ?48.37,10.9 (small view)
 if(area==0) navigator.geolocation.getCurrentPosition(function(e){getFeatureInfo([e.coords.latitude,e.coords.longitude])},function(e){getFeatureInfo(0)});
