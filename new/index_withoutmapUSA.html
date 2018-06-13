@@ -13,7 +13,7 @@
 <div id="anzeige"></div>
 
 <script>
-var area=location.search.slice(1)||prompt("enter area (0 = \u2316)","48.4,10.9")||0  //URL parameter ?48.37,10.9 (small view)
+var area=location.search.slice(1)||prompt("enter coordinates (0 = \u2316)","48.4,10.9")||0  //URL parameter ?48.37,10.9 (small view)
 if(area==0) navigator.geolocation.getCurrentPosition(function(e){getFeatureInfo([e.coords.latitude,e.coords.longitude])},function(e){getFeatureInfo(0)});
 else getFeatureInfo(area.split(","))
 
@@ -30,16 +30,20 @@ var url = lon<0? "https://api.weather.gov/alerts/active?point="+lat+","+lon :  /
 }
 
 function showGetFeatureInfo(data) { var content="", opt={day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}
-data.features.forEach(function(item){ item=item.properties
+var severity=["no warnings","Minor","Moderate","Severe","Extreme"], max=0
+if(data.features) data.features.forEach(function(item){ item=item.properties
+max=Math.max(max,severity.indexOf(item.severity||item.SEVERITY))
 content += "<p>"+(item.EVENT||item.event)
 +"<br>"+new Date(item.ONSET||item.onset).toLocaleString(data.title?'en-US':'de',opt)  //+" Uhr"
 +"<br>"+new Date(item.EXPIRES||item.expires).toLocaleString(data.title?'en-US':'de',opt)  //+" Uhr"
 + "</p>"
 })
 
-if(location.search && content) content="weather alert"  //small view
-document.querySelector("#anzeige").innerHTML=(location.search?'':"<h2>Official warning</h2>")+(content||"no warnings")+" <a href='https://www.dwd.de/warnungen'>dwd.de</a>" +" <a href='https://www.weather.gov'>NWS</a>"
-//fetch('http://localhost:8000/api/newdeveloper/groups/0/action',{method:"PUT",body:content?'{"hue":10920}':'{"hue":21840}',headers:{'Content-Type':'application/json'}})  //philipshue
+var small=true; small=location.search && small  //edit here false
+var wl=1; if(max<wl) max=0  //Minor warnlevel edit here
+if(small) content=severity[max]  //small view
+document.querySelector("#anzeige").innerHTML=(small?'':"<h2>Official warning</h2>")+(content||"no warnings")+" <a href='https://www.dwd.de/warnungen'>dwd.de</a>" +" <a href='https://www.weather.gov'>NWS</a>"
+//fetch('http://localhost:8000/api/newdeveloper/sensors/3/state',{method:"PUT",body:'{"status":'+max+'}',headers:{'Content-Type':'application/json'}})  //philipshue
 }
 </script>
 
