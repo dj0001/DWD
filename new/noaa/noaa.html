@@ -4,7 +4,7 @@
 //parameter zone ?IAZ027 (disable hue)
 
 function update() {
-fetch("https://api.weather.gov/alerts/active/"+para).then(function(response){
+fetch("https://api.weather.gov/alerts/active"+para).then(function(response){
 response.json().then(function(data){
 document.getElementById("content").innerHTML="<a href='https://alerts.weather.gov/cap/"+(area.length-2?"wwaatmget.php?x="+area+"&y=1":area+".php?x=1")+"'>"+data.title+"</a>"
 
@@ -33,7 +33,7 @@ xhr.send(JSON.stringify(bd))
 }
 
 var area=location.search.slice(1)||prompt("enter area (0 = \u2316)","IA")||"IA"  //IAZ027 38.9,-77.0
-var para=area.length-2? "zone/"+area :"area/"+area
+var para=area.length-2? "/zone/"+area :"/area/"+area
 if(area==0) { navigator.geolocation.getCurrentPosition(function(pos){para="?point="+pos.coords.latitude+","+pos.coords.longitude;update()}) }
 if(area.match(",")) para="?point="+area
 if(!location.search) {
