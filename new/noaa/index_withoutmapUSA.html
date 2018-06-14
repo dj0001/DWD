@@ -4,6 +4,7 @@
 <head>
 	<title>DWD- Warnmodul 2</title>
 	<meta charset="utf-8" />
+	<meta name="description" content="weather alerts from DWD and NOAA">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="author" content="dj0001">
 	<link rel="icon" type="image/png" sizes="192x192" href="icons/warn.png">
@@ -44,7 +45,7 @@ content += "<p>"+(item.EVENT||item.event)
  +"<br>"+new Date(item.ONSET||item.onset).toLocaleString(data.title?'en-US':'de',opt)  //+" Uhr"
  +"<br>"+new Date(item.EXPIRES||item.expires).toLocaleString(data.title?'en-US':'de',opt)  //+" Uhr"
  + "</p>"
-})
+}); else content+="out of bounds"
 
 var small=true; small=location.search && small  //edit here false
 var wl=1; if(max<wl) max=0  //Minor warnlevel edit here
