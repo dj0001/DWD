@@ -31,7 +31,7 @@ var lat=1*ort[0]||48.4, lon=1*ort[1]||10.9  //edit here
 console.log(lat+","+lon)
 if(lon>0 && (lon<5.8||lon>15||lat<47.2||lat>55)) {showGetFeatureInfo({}); return 0}  //out of bounds
 var url = lon<0? "https://api.weather.gov/alerts/active?point="+lat+","+lon :  //USA
-"https://maps.dwd.de/geoserver/dwd/wms/?request=GetFeatureInfo&service=WMS&srs=EPSG%3A4326&styles=&transparent=true&version=1.1.1&format=image%2Fpng&bbox="+lon+"%2C"+lat+"%2C"+(1*lon+0.001)+"%2C"+(1*lat+0.001)+"&height=1&width=1&layers=Warnungen_Gemeinden_vereinigt&query_layers=Warnungen_Gemeinden_vereinigt&info_format=application%2Fjson&propertyName=EVENT%2CONSET%2CEXPIRES%2CSENT%2CSEVERITY%2CEC_GROUP%2CSENT&FEATURE_COUNT=50&x=0&y=0"
+"https://maps.dwd.de/geoserver/dwd/wms/?request=GetFeatureInfo&service=WMS&srs=EPSG%3A4326&styles=&transparent=true&version=1.1.1&format=image%2Fpng&bbox="+lon+"%2C"+lat+"%2C"+(1*lon+0.001)+"%2C"+(1*lat+0.001)+"&height=1&width=1&layers=Warnungen_Gemeinden_vereinigt&query_layers=Warnungen_Gemeinden_vereinigt&info_format=application%2Fjson&propertyName=EVENT%2CONSET%2CEXPIRES%2CSENT%2CSEVERITY%2CEC_GROUP&FEATURE_COUNT=50&x=0&y=0"
 
  var xhr = new XMLHttpRequest()
  xhr.open("GET", url, true)
@@ -42,10 +42,12 @@ var url = lon<0? "https://api.weather.gov/alerts/active?point="+lat+","+lon :  /
 function showGetFeatureInfo(data) { var content="", opt={day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}
 var severity=["no warnings","Minor","Moderate","Severe","Extreme"], max=0, color=[120,60,30,0,330]
 if(data.features) data.features.forEach(function(item){ item=item.properties
-max=Math.max(max,severity.indexOf(item.severity||item.SEVERITY))
+var mx=severity.indexOf(item.severity||item.SEVERITY); max=Math.max(max,mx)
+var o=new Date(item.ONSET||item.onset),     os=(o.getTime()-Date.now())/86.4e4  //24h
+var e=new Date(item.EXPIRES||item.expires), es=(e.getTime()-Date.now())/86.4e4, col="hsl("+color[max]+",100%,50%)"
 content += "<p>"+(item.EVENT||item.event)
- +"<br>"+new Date(item.ONSET||item.onset).toLocaleString(data.title?'en-US':'de',opt)  //+" Uhr"
- +"<br>"+new Date(item.EXPIRES||item.expires).toLocaleString(data.title?'en-US':'de',opt)  //+" Uhr"
+ +"<br>"+o.toLocaleString(data.title?'en-US':'de',opt)  //+" Uhr"
+ +"<br><span style='background:linear-gradient(to right, #80ff80,#80ff80 "+os+"%,"+col+" "+os+"%,"+col+" "+es+"%,#80ff80 "+es+"%)'>"+e.toLocaleString(data.title?'en-US':'de',opt)+"</span>"
  + "</p>"
 }); else content+="out of bounds"
 
