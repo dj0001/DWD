@@ -44,7 +44,7 @@ var severity=["no warnings","Minor","Moderate","Severe","Extreme"], max=0, color
 if(data.features) data.features.forEach(function(item){ item=item.properties
 var mx=severity.indexOf(item.severity||item.SEVERITY); max=Math.max(max,mx)
 var o=new Date(item.ONSET||item.onset),     os=(o.getTime()-Date.now())/86.4e4  //24h
-var e=new Date(item.EXPIRES||item.expires), es=(e.getTime()-Date.now())/86.4e4, col="hsl("+color[max]+",100%,50%)"
+var e=new Date(item.EXPIRES||item.expires), es=(e.getTime()-Date.now())/86.4e4, col="hsl("+color[mx]+",100%,50%)"
 content += "<p>"+(item.EVENT||item.event)
  +"<br>"+o.toLocaleString(data.title?'en-US':'de',opt)  //+" Uhr"
  +"<br><span style='background:linear-gradient(to right, #80ff80,#80ff80 "+os+"%,"+col+" "+os+"%,"+col+" "+es+"%,#80ff80 "+es+"%)'>"+e.toLocaleString(data.title?'en-US':'de',opt)+"</span>"
