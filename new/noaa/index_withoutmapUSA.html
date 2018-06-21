@@ -14,7 +14,7 @@
 <div id="anzeige">Official warning</div>
 
 <script>
-var qs=location.search.slice(1)
+var qs=location.search.slice(1), color=[120,60,30,0,330]
 if(qs==1) { qs=""  // ?1 enable philipshue
  var bridge="http://localhost:8000/api/newdeveloper"  //edit here https://localhost:443/api/newdeveloper
  bridge=prompt("change bridge adress\n"+bridge,(localStorage||{}).bridge||bridge)||bridge
@@ -23,9 +23,14 @@ if(qs==1) { qs=""  // ?1 enable philipshue
 var area=qs||prompt("enter coordinates (0 = \u2316)",(localStorage||{}).point||"48.4,10.9")||0  //URL parameter ?48.37,10.9 (small view)
 if(area==0) navigator.geolocation.getCurrentPosition(function(e){getFeatureInfo([e.coords.latitude,e.coords.longitude])},function(e){getFeatureInfo(0)});
 else if(area.match(',')) getFeatureInfo(area.split(","))
-else getFeatureInfo2()  //IT 013
+else getFeatureInfo2()  //IT013
 localStorage.point=area
-/* */
+
+function getFeatureInfo2() {
+fetch('https://api.rss2json.com/v1/api.json?rss_url=http://meteoalarm.eu/documents/rss/'+area.slice(0,2).toLowerCase()+'/'+area+'.rss')
+ .then(function(response) {response.json().then(function(data) {  //setTimeout(function(){getFeatureInfo2()}, 300000)
+var dsc=data.items[0].description; document.querySelector("#anzeige").innerHTML=data.feed.title+'<br>'+dsc; hue(dsc.match(/level:(\d)/)[1]-1)}) })
+}
 
 function getFeatureInfo(ort) {
 var lat=1*ort[0]||48.4, lon=1*ort[1]||10.9  //edit here
@@ -41,7 +46,7 @@ var url = lon<0? "https://api.weather.gov/alerts/active?point="+lat+","+lon :  /
 }
 
 function showGetFeatureInfo(data) { var content="", opt={day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}
-var severity=["no warnings","Minor","Moderate","Severe","Extreme"], max=0, color=[120,60,30,0,330]
+var severity=["no warnings","Minor","Moderate","Severe","Extreme"], max=0
 if(data.features) data.features.forEach(function(item){ item=item.properties
 var mx=severity.indexOf(item.severity||item.SEVERITY); max=Math.max(max,mx)
 var o=new Date(item.ONSET||item.onset),     os=(o.getTime()-Date.now())/86.4e4  //24h
@@ -56,9 +61,10 @@ var small=true; small=location.search && small  //edit here false
 var wl=1; if(max<wl) max=0  //Minor warnlevel edit here
 if(small) content="<a href='https://dj0001.github.io/DWD-Warnmodul-2/?ort="+area+"' target='map' style='color:hsl("+color[max]+",100%,50%); text-decoration:none'>&#x25b3; </a>"+ severity[max]  //small view
 document.querySelector("#anzeige").innerHTML=(small?'':"<h2>Official warning</h2>")+(content||"no warnings")+" <a href='https://www.dwd.de/warnungen'>dwd.de</a>" +" <a href='https://www.weather.gov'>NWS</a>"
-
-if(location.search.slice(1)==1) fetch(bridge+'/'+(isNaN(light)?'sensors':'lights/')+light+'/state',{method:"PUT",body:isNaN(light)?'{"status":'+max+'}':'{"hue":'+182*color[max]+'}',headers:{'Content-Type':'application/json'}})
+hue(max)
 }
+
+function hue(max) {if(location.search.slice(1)==1) fetch(bridge+'/'+(isNaN(light)?'sensors':'lights/')+light+'/state',{method:"PUT",body:isNaN(light)?'{"status":'+max+'}':'{"hue":'+182*color[max]+'}',headers:{'Content-Type':'application/json'}})}
 </script>
 
 </body>
