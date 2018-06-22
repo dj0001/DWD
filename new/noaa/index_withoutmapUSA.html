@@ -27,7 +27,7 @@ else getFeatureInfo2()  //IT013
 localStorage.point=area
 
 function getFeatureInfo2() {
-fetch('https://api.rss2json.com/v1/api.json?rss_url=http://meteoalarm.eu/documents/rss/'+area.slice(0,2).toLowerCase()+'/'+area+'.rss')
+fetch('https://api.rss2json.com/v1/api.json?rss_url=https://meteoalarm.eu/documents/rss/'+area.slice(0,2).toLowerCase()+(area[2]?'/'+area:'')+'.rss')
  .then(function(response) {response.json().then(function(data) {  //setTimeout(function(){getFeatureInfo2()}, 300000)
 var dsc=data.items[0].description; document.querySelector("#anzeige").innerHTML=data.feed.title+'<br>'+dsc; hue(dsc.match(/level:(\d)/)[1]-1)}) })
 }
