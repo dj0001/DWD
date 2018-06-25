@@ -63,7 +63,7 @@ content += "<p>"+(item.EVENT||item.event)
 var small=true; small=location.search && small  //edit here false
 var wl=1; if(max<wl) max=0  //Minor warnlevel edit here
 if(small) content="<a href='https://dj0001.github.io/DWD-Warnmodul-2/?ort="+area+"' target='map' style='color:hsl("+color[max]+",100%,50%); text-decoration:none'>&#x25b3; </a>"+ severity[max]  //small view
-document.querySelector("#anzeige").innerHTML=(small?'':"<h2>Official warning</h2>")+(content||"no warnings")+" <a href='https://www.dwd.de/warnungen'>dwd.de</a>" +" <a href='https://www.weather.gov'>NWS</a>"
+document.querySelector("#anzeige").innerHTML=(small?'':area+"<h2>Official warning</h2>")+(content||"no warnings")+" <a href='https://www.dwd.de/warnungen'>dwd.de</a>" +" <a href='https://www.weather.gov'>NWS</a>"
 hue(max)
 }
 
