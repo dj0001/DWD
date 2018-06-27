@@ -23,18 +23,14 @@ if(qs==1) { qs=""  // ?1 enable philipshue
 var area=qs||prompt("enter coordinates or location (0 = \u2316)",(localStorage||{}).point||"48.4,10.9")||0  //URL parameter ?48.37,10.9 (small view)
 if(area==0||area==1) locate(); 
 else if(area.match(/^[\d,-\.]+$/)) getFeatureInfo(area.split(","))
-else if(area.match(/^[A-Z]{2}(\d|$)/)) getFeatureInfo2()  //IT013
+else if(area.match(/^[A-Z]{2}(\d|$)/)) getFeatureInfo(0,'eu')  //IT013
 else fetch("https://nominatim.openstreetmap.org/search?q=" + area + "&format=json&limit=1&addressdetails=1")
  .then(function(response) {response.json().then(function(data) {getFeatureInfo([data[0].lat,data[0].lon],data[0].address.country_code) })})
 localStorage.point=area
 
 function locate(){navigator.geolocation.getCurrentPosition(function(e){getFeatureInfo([e.coords.latitude,e.coords.longitude])},function(e){getFeatureInfo(0)})}
 
-function getFeatureInfo2() {
-fetch('https://api.rss2json.com/v1/api.json?rss_url=https://meteoalarm.eu/documents/rss/'+area.slice(0,2).toLowerCase()+(area[2]?'/'+area:'')+'.rss')
- .then(function(response) {response.json().then(function(data) {  //setTimeout(function(){getFeatureInfo2()}, 300000)
-var dsc=data.items[0].description; document.querySelector("#anzeige").innerHTML=data.feed.title+'<br>'+dsc; hue(dsc.match(/level:(\d)/)[1]-1)}) })
-}
+function showGetFeatureInfo2(data) {var dsc=data.items[0].description; document.querySelector("#anzeige").innerHTML=data.feed.title+'<br>'+dsc; hue(dsc.match(/level:(\d)/)[1]-1)}
 
 function getFeatureInfo(ort,cc) {
 var lat=1*ort[0]||48.4, lon=1*ort[1]||10.9  //edit here
@@ -42,12 +38,13 @@ console.log(lat+","+lon)
 if(!cc && lon>-10 && (lon<5.8||lon>15||lat<47.2||lat>55)) {document.querySelector("#anzeige").innerHTML='enter meteoalarm region (IT013)'; return 0}  //
 if(!cc) {cc=lon<0?'us':'de'}  //or do a reverse search
 var urls={us:"https://api.weather.gov/alerts/active?point="+lat+","+lon,
- de:"https://maps.dwd.de/geoserver/dwd/wms/?request=GetFeatureInfo&service=WMS&srs=EPSG%3A4326&styles=&transparent=true&version=1.1.1&format=image%2Fpng&bbox="+lon+"%2C"+lat+"%2C"+(1*lon+0.001)+"%2C"+(1*lat+0.001)+"&height=1&width=1&layers=Warnungen_Gemeinden_vereinigt&query_layers=Warnungen_Gemeinden_vereinigt&info_format=application%2Fjson&propertyName=EVENT%2CONSET%2CEXPIRES%2CSENT%2CSEVERITY%2CEC_GROUP&FEATURE_COUNT=50&x=0&y=0"}
-var url=urls[cc]; if(!url) {area=cc; getFeatureInfo2(); return 0}
+ de:"https://maps.dwd.de/geoserver/dwd/wms/?request=GetFeatureInfo&service=WMS&srs=EPSG%3A4326&styles=&transparent=true&version=1.1.1&format=image%2Fpng&bbox="+lon+"%2C"+lat+"%2C"+(1*lon+0.001)+"%2C"+(1*lat+0.001)+"&height=1&width=1&layers=Warnungen_Gemeinden_vereinigt&query_layers=Warnungen_Gemeinden_vereinigt&info_format=application%2Fjson&propertyName=EVENT%2CONSET%2CEXPIRES%2CSENT%2CSEVERITY%2CEC_GROUP&FEATURE_COUNT=50&x=0&y=0",
+ eu:'https://api.rss2json.com/v1/api.json?rss_url=https://meteoalarm.eu/documents/rss/'+area.slice(0,2).toLowerCase()+(area[2]?'/'+area:'')+'.rss'}
+var url=urls[cc]; if(!url) {area=cc; getFeatureInfo(0,'eu'); return 0}
 
  var xhr = new XMLHttpRequest()
  xhr.open("GET", url, true)
- xhr.onload = function() {var data=JSON.parse(this.response); showGetFeatureInfo(data); setTimeout(function(){area==1?locate():getFeatureInfo(ort,cc)}, 300000) }  //1 watch-geo
+ xhr.onload = function() {var data=JSON.parse(this.response); data.feed?showGetFeatureInfo2(data):showGetFeatureInfo(data); setTimeout(function(){area==1?locate():getFeatureInfo(ort,cc)}, 300000) }  //1 watch-geo
  xhr.send()
 }
 
