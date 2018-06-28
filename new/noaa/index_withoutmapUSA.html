@@ -13,7 +13,7 @@
 <div id="anzeige">Official warning</div>
 
 <script>
-var qs=location.search.slice(1), color=[120,60,30,0,330,270]
+var qs=location.search.slice(1), color=[120,60,30,0,330,270], mx0, push=false
 if(qs==1) { qs=""  // ?1 enable philipshue
  var bridge="http://localhost:8000/api/newdeveloper"  //edit here https://localhost:443/api/newdeveloper
  bridge=prompt("change bridge adress\n"+bridge,(localStorage||{}).bridge||bridge)||bridge
@@ -67,7 +67,7 @@ document.querySelector("#anzeige").innerHTML=(small?'':area+"<h2>Official warnin
 hue(max<=2&&data.features[0]&&data.features[0].properties.event=='Heat Advisory'?5: max)
 }
 
-function hue(max) {if(location.search.slice(1)==1) fetch(bridge+'/'+(isNaN(light)?'sensors':'lights/')+light+'/state',{method:"PUT",body:isNaN(light)?'{"status":'+max+'}':'{"hue":'+182*color[max]+'}',headers:{'Content-Type':'application/json'}})}  //,"on":true
+function hue(max) {if(location.search.slice(1)==1 &&max!==mx0) fetch(bridge+'/'+(isNaN(light)?'sensors':'lights/')+light+'/state',{method:"PUT",body:isNaN(light)?'{"status":'+max+'}':'{"hue":'+182*color[max]+'}',headers:{'Content-Type':'application/json'}}); if(push) mx0=max}  //,"on":true
 </script>
 
 </body>
