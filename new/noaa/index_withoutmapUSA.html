@@ -24,22 +24,24 @@ var area=qs||prompt("enter coordinates or location (0 = \u2316)",(localStorage||
 if(area==0||area==1) locate(); 
 else if(area.match(/^[\d,-\.]+$/)) getFeatureInfo(area.split(","))
 else if(area.match(/^[A-Z]{2}(\d|$)/)) getFeatureInfo(0,'eu')  //IT013
+else if(area.match(/^[a-z]{2}/)) getFeatureInfo(0,'au')  //nsw
 else fetch("https://nominatim.openstreetmap.org/search?q=" + area + "&format=json&limit=1&addressdetails=1")
  .then(function(response) {response.json().then(function(data) {getFeatureInfo([data[0].lat,data[0].lon],data[0].address.country_code) })})
 localStorage.point=area
 
 function locate(){navigator.geolocation.getCurrentPosition(function(e){getFeatureInfo([e.coords.latitude,e.coords.longitude])},function(e){getFeatureInfo(0)})}
 
-function showGetFeatureInfo2(data) {var dsc=data.items[0].description; document.querySelector("#anzeige").innerHTML=data.feed.title+'<br>'+dsc; hue(dsc.match('awt:5 level:2')?5:dsc.match(/level:(\d)/)[1]-1)}  //5=Heat
+function showGetFeatureInfo2(data) {var dsc=data.items[0]?data.items[0].description||data.items[0].title:'no warnings'; document.querySelector("#anzeige").innerHTML=data.feed.title+'<br>'+dsc; hue(dsc.match('awt:5 level:2')?5:dsc.match(/level:(\d)/)[1]-1)}  //5=Heat
 
 function getFeatureInfo(ort,cc) {
-var lat=1*ort[0]||48.4, lon=1*ort[1]||10.9  //edit here
+var lat=1*ort[0]||48.4, lon=1*ort[1]||10.9, rss='https://api.rss2json.com/v1/api.json?rss_url='  //edit here
 console.log(lat+","+lon)
 if(!cc && lon>-10 && (lon<5.8||lon>15||lat<47.2||lat>55)) {document.querySelector("#anzeige").innerHTML='enter meteoalarm region (IT013)'; return 0}  //
 if(!cc) {cc=lon<0?'us':'de'}  //or do a reverse search
 var urls={us:"https://api.weather.gov/alerts/active?point="+lat+","+lon,
  de:"https://maps.dwd.de/geoserver/dwd/wms/?request=GetFeatureInfo&service=WMS&srs=EPSG%3A4326&styles=&transparent=true&version=1.1.1&format=image%2Fpng&bbox="+lon+"%2C"+lat+"%2C"+(1*lon+0.001)+"%2C"+(1*lat+0.001)+"&height=1&width=1&layers=Warnungen_Gemeinden_vereinigt&query_layers=Warnungen_Gemeinden_vereinigt&info_format=application%2Fjson&propertyName=EVENT%2CONSET%2CEXPIRES%2CSENT%2CSEVERITY%2CEC_GROUP&FEATURE_COUNT=50&x=0&y=0",
- eu:'https://api.rss2json.com/v1/api.json?rss_url=https://meteoalarm.eu/documents/rss/'+area.slice(0,2).toLowerCase()+(area[2]?'/'+area:'')+'.rss'}
+ eu:rss+'https://meteoalarm.eu/documents/rss/'+area.slice(0,2).toLowerCase()+(area[2]?'/'+area:'')+'.rss',
+ au:rss+'http://www.bom.gov.au/fwo/IDZ000'+(['nsw','nt','qld','sa','tas','vic','wa'].indexOf(area)+54)+'.warnings_'+area+'.xml'}
 var url=urls[cc]; if(!url) {area=cc; getFeatureInfo(0,'eu'); return 0}
 
  var xhr = new XMLHttpRequest()
