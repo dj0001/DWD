@@ -32,7 +32,7 @@ localStorage.point=area
 function locate(){navigator.geolocation.getCurrentPosition(function(e){getFeatureInfo([e.coords.latitude,e.coords.longitude])},function(e){getFeatureInfo(0)})}
 
 function showGetFeatureInfo2(data) {var dsc=data.items[0]?data.items[0].description||data.items[0].title:'no warnings', l; document.querySelector("#anzeige").innerHTML=data.feed.title+'<br>'+dsc;
- if(!data.items[0]) l=0;else if(!data.items[0].description) l=1;else l=dsc.match('awt:5 level:2')?5:dsc.match(/level:(\d)/)[1]-1; hue(l)}  //5=Heat
+ if(!data.items[0]) l=0;else if(!dsc.match('level:')) l=1;else l=dsc.match('awt:5 level:2')?5:dsc.match(/level:(\d)/)[1]-1; hue(l)}  //5=Heat
 
 function getFeatureInfo(ort,cc) {
 var lat=1*ort[0]||48.4, lon=1*ort[1]||10.9, rss='https://api.rss2json.com/v1/api.json?rss_url='  //edit here
