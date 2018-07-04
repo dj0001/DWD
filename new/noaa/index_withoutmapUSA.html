@@ -42,7 +42,7 @@ var urls={us:"https://api.weather.gov/alerts/active?point="+lat+","+lon,
  de:"https://maps.dwd.de/geoserver/dwd/wms/?request=GetFeatureInfo&service=WMS&srs=EPSG%3A4326&styles=&transparent=true&version=1.1.1&format=image%2Fpng&bbox="+lon+"%2C"+lat+"%2C"+(1*lon+0.001)+"%2C"+(1*lat+0.001)+"&height=1&width=1&layers=Warnungen_Gemeinden_vereinigt&query_layers=Warnungen_Gemeinden_vereinigt&info_format=application%2Fjson&propertyName=EVENT%2CONSET%2CEXPIRES%2CSENT%2CSEVERITY%2CEC_GROUP&FEATURE_COUNT=50&x=0&y=0",
  eu:rss+'https://meteoalarm.eu/documents/rss/'+area.slice(0,2).toLowerCase()+(area[2]?'/'+area:'')+'.rss',
  au:rss+'http://www.bom.gov.au/fwo/IDZ000'+function(s){var au={Ne:"nsw",No:"nt",Qe:"qld",So:"sa",Ta:"tas",Vi:"vic",We:"wa"}; return Object.keys(au).indexOf(s)+54+'.warnings_'+au[s]}((st||'').slice(0,2).replace('Au','Ne'))+'.xml'}
-var url=urls[cc]; if(!url) {area=cc; getFeatureInfo(0,'eu'); return 0}
+var url=urls[cc]; if(!url &&lon>-10) {area=cc.replace('gb','uk'); getFeatureInfo(0,'eu'); return 0}
 
  var xhr = new XMLHttpRequest()
  xhr.open("GET", url, true)
